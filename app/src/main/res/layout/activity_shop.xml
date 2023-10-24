@@ -7,6 +7,18 @@
     android:background="#C09958"
     tools:context=".ShopActivity">
 
+    <TextView
+        android:id="@+id/shopHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Welcome to the Shop!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pawnmiFrame" />
+
     <FrameLayout
         android:id="@+id/pawnmiFrame"
         android:layout_width="410dp"
@@ -38,11 +50,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="80dp"
-            android:layout_height="70dp"
-            app:srcCompat="@drawable/corner_button" />
+        <ImageButton
+            android:id="@+id/shopBackBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="#00FFFFFF"
+            android:cropToPadding="false"
+            android:scaleType="center"
+            android:src="@drawable/corner_button" />
 
         <ImageView
             android:id="@+id/backArrow"
@@ -55,6 +70,7 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="409dp"
         android:layout_height="481dp"
         android:backgroundTint="#F3F3F3"
@@ -67,7 +83,8 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp">
 
             <ImageButton
                 android:id="@+id/shopButton1"
@@ -92,6 +109,62 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/shopButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:contentDescription="Shop button"
+                app:srcCompat="@drawable/shop_button" />
+
+            <TextView
+                android:id="@+id/shopText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:clickable="false"
+                android:contextClickable="false"
+                android:linksClickable="false"
+                android:longClickable="false"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <ImageButton
+                android:id="@+id/shopButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:contentDescription="Shop button"
+                app:srcCompat="@drawable/shop_button" />
+
+            <TextView
+                android:id="@+id/shopText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:clickable="false"
+                android:contextClickable="false"
+                android:linksClickable="false"
+                android:longClickable="false"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </FrameLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
