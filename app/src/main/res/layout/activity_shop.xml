@@ -25,6 +25,7 @@
             android:id="@+id/pawnmi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:srcCompat="@drawable/pawnmi_1" />
@@ -58,42 +59,39 @@
         android:layout_height="481dp"
         android:backgroundTint="#F3F3F3"
         android:orientation="vertical"
+        android:paddingTop="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pawnmiFrame">
 
-        <Button
-            android:id="@+id/shopBtn1"
-            android:layout_width="match_parent"
+        <FrameLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginEnd="50dp"
-            android:backgroundTint="#837C7C"
-            android:text="Button"
-            app:cornerRadius="2dp" />
+            android:layout_gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/shopBtn2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginEnd="50dp"
-            android:backgroundTint="#837C7C"
-            android:text="Button"
-            app:cornerRadius="2dp" />
+            <ImageButton
+                android:id="@+id/shopButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:contentDescription="Shop button"
+                app:srcCompat="@drawable/shop_button" />
 
-        <Button
-            android:id="@+id/shopBtn3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginEnd="50dp"
-            android:backgroundTint="#837C7C"
-            android:text="Button"
-            app:cornerRadius="2dp" />
+            <TextView
+                android:id="@+id/shopText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:clickable="false"
+                android:contextClickable="false"
+                android:linksClickable="false"
+                android:longClickable="false"
+                android:text="TextView"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
