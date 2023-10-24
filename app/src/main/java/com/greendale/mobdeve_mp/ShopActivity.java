@@ -12,12 +12,14 @@ import android.widget.ImageButton;
 
 public class ShopActivity extends AppCompatActivity {
 
-    ImageButton shopBackBtn, shopButton1, shopButton2, shopButton3;
+    ImageButton shopBackBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
+
+        shopBackBtn = (ImageButton) findViewById(R.id.shopBackBtn);
 
         ImageButton[] shopButton = new ImageButton[3];
         shopButton[0] = (ImageButton) findViewById(R.id.shopButton1);
@@ -33,5 +35,11 @@ public class ShopActivity extends AppCompatActivity {
                 }
             });
         }
+        shopBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }
