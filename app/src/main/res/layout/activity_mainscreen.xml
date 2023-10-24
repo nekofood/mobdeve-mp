@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Mainscreen">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="Background"
+        android:src="@tools:sample/avatars"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/Background" />
+
+    <ImageButton
+        android:id="@+id/foodButton"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="-50dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Food"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_food"
+        app:layout_constraintBottom_toTopOf="@+id/menuButton"
+        app:layout_constraintEnd_toStartOf="@+id/menuButton" />
+
+    <ImageButton
+        android:id="@+id/waterButton"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="-15dp"
+        android:layout_marginBottom="20dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Water"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_water"
+        app:layout_constraintBottom_toTopOf="@+id/menuButton"
+        app:layout_constraintStart_toStartOf="@+id/menuButton" />
+
+    <ImageButton
+        android:id="@+id/careButton"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:layout_marginEnd="-14dp"
+        android:layout_marginBottom="20dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Care"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_heart"
+        app:layout_constraintBottom_toTopOf="@+id/menuButton"
+        app:layout_constraintEnd_toEndOf="@+id/menuButton" />
+
+    <ImageButton
+        android:id="@+id/fightButton"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginBottom="-50dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Fight"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_fight"
+        app:layout_constraintBottom_toTopOf="@+id/menuButton"
+        app:layout_constraintStart_toEndOf="@+id/menuButton" />
+
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="153dp"
+        android:layout_height="80dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Menu"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/menubutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:contentDescription="Byte"
+        app:layout_constraintBottom_toTopOf="@+id/menuButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
