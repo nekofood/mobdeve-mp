@@ -14,26 +14,6 @@ public class ShopActivity extends AppCompatActivity {
 
     ImageButton shopBackBtn, shopButton1, shopButton2, shopButton3;
 
-    private class ShopFragment extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("Purchase this item?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    });
-            return builder.create();
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +24,12 @@ public class ShopActivity extends AppCompatActivity {
         shopButton[1] = (ImageButton) findViewById(R.id.shopButton2);
         shopButton[2] = (ImageButton) findViewById(R.id.shopButton3);
 
-
-
         for (ImageButton btn : shopButton) {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    DialogFragment frag = new ShopFragment();
+                    frag.show(getSupportFragmentManager(), "buy");
                 }
             });
         }

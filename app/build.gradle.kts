@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.greendale.mobdeve_mp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.greendale.mobdeve_mp"
