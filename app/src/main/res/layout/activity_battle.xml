@@ -23,6 +23,7 @@
         android:layout_height="82dp"
         android:background="#00FFFFFF"
         android:contentDescription="pausebutton"
+        android:onClick="Pause"
         android:scaleType="fitStart"
         android:src="@drawable/corner_button"
         app:layout_constraintStart_toStartOf="parent"

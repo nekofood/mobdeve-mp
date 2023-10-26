@@ -102,6 +102,7 @@
         android:id="@+id/slideMenu"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:visibility="invisible"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -157,6 +158,30 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageButton9" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/passion_one"
+                android:text="Shop"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
+                app:layout_constraintEnd_toEndOf="@+id/imageButton8"
+                app:layout_constraintStart_toStartOf="@+id/imageButton8"
+                app:layout_constraintTop_toTopOf="@+id/imageButton8" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/passion_one"
+                android:text="Settings"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButton9"
+                app:layout_constraintEnd_toEndOf="@+id/imageButton9"
+                app:layout_constraintStart_toStartOf="@+id/imageButton9"
+                app:layout_constraintTop_toTopOf="@+id/imageButton9" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
