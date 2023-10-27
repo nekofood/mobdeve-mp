@@ -33,4 +33,8 @@ public class Mainscreen extends AppCompatActivity {
         Intent intent = new Intent(Mainscreen.this, Battle.class);
         startActivity(intent);
     }
+    public void GoToShop(View v){
+        Intent intent = new Intent(Mainscreen.this, ShopActivity.class);
+        startActivity(intent);
+    }
     }
