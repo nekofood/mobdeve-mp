@@ -34,7 +34,7 @@ public class QuizActivity extends AppCompatActivity {
         quizBtn2 = (ImageButton) findViewById(R.id.quizButton2);
         quizBtn3 = (ImageButton) findViewById(R.id.quizButton3);
 
-        quizBtnTxt1.setOnClickListener(new View.OnClickListener() {
+        quizBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (question != -1) {
@@ -43,7 +43,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        quizBtnTxt2.setOnClickListener(new View.OnClickListener() {
+        quizBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (question == -1) {
@@ -51,10 +51,13 @@ public class QuizActivity extends AppCompatActivity {
                     quizBtnFrame3.setVisibility(View.VISIBLE);
                     nextQuestion();
                 }
+                else {
+                    nextQuestion();
+                }
             }
         });
 
-        quizBtnTxt3.setOnClickListener(new View.OnClickListener() {
+        quizBtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (question != -1) {
