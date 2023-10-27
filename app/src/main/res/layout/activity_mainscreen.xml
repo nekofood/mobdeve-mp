@@ -10,7 +10,6 @@
         android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@tools:sample/avatars"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,8 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:src="@tools:sample/avatars"
-            app:srcCompat="@drawable/SlideMenu" />
+            app:srcCompat="@drawable/slidemenu" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -126,7 +124,7 @@
                 android:layout_marginTop="45dp"
                 android:background="#00FFFFFF"
                 android:contentDescription="Settings"
-                android:src="@drawable/SMButton"
+                android:src="@drawable/smbutton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +137,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#00FFFFFF"
                 android:contentDescription="Settings"
-                android:src="@drawable/SMButton"
+                android:src="@drawable/smbutton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +151,7 @@
                 android:background="#00FFFFFF"
                 android:contentDescription="Settings"
                 android:onClick="CloseSesame"
-                android:src="@drawable/SDButton"
+                android:src="@drawable/sdbutton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

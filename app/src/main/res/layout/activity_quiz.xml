@@ -23,11 +23,10 @@
         android:layout_marginTop="-50dp"
         android:rotation="180"
         android:scaleX="1"
-        android:src="@tools:sample/avatars"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/SlideMenu" />
+        app:srcCompat="@drawable/slidemenu" />
 
     <TextView
         android:id="@+id/quizTitle"
@@ -75,7 +74,7 @@
                 android:backgroundTint="#00FFFFFF"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:src="@drawable/SMButton"
+                android:src="@drawable/smbutton"
                 tools:visibility="visible" />
 
             <TextView
@@ -100,7 +99,7 @@
                 android:backgroundTint="#00FFFFFF"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:src="@drawable/SMButton"
+                android:src="@drawable/smbutton"
                 tools:visibility="visible" />
 
             <TextView
@@ -127,7 +126,7 @@
                 android:backgroundTint="#00FFFFFF"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:src="@drawable/SMButton"
+                android:src="@drawable/smbutton"
                 tools:visibility="visible" />
 
             <TextView
