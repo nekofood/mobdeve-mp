@@ -26,6 +26,7 @@
         android:background="#00FFFFFF"
         android:contentDescription="Food"
         android:cropToPadding="false"
+        android:onClick="giveFood"
         android:scaleType="fitCenter"
         android:src="@drawable/button_food"
         app:layout_constraintBottom_toTopOf="@+id/menuButton"
@@ -40,6 +41,7 @@
         android:background="#00FFFFFF"
         android:contentDescription="Water"
         android:cropToPadding="false"
+        android:onClick="giveWater"
         android:scaleType="fitCenter"
         android:src="@drawable/button_water"
         app:layout_constraintBottom_toTopOf="@+id/menuButton"
@@ -54,6 +56,7 @@
         android:background="#00FFFFFF"
         android:contentDescription="Care"
         android:cropToPadding="false"
+        android:onClick="giveCare"
         android:scaleType="fitCenter"
         android:src="@drawable/button_heart"
         app:layout_constraintBottom_toTopOf="@+id/menuButton"
@@ -99,11 +102,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/birthdaybear" />
 
+    <ImageView
+        android:id="@+id/heartIndicator"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="50dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        android:src="@drawable/heart" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/graphicIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/bowl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="190dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/foodbowlempty" />
+
+        <ImageView
+            android:id="@+id/container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="300dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/megabites" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <FrameLayout
         android:id="@+id/slideMenu"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
