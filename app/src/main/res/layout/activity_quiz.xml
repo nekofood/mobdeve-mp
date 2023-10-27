@@ -62,9 +62,11 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <FrameLayout
+            android:id="@+id/quizBtn1Frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            tools:visibility="invisible">
 
             <ImageButton
                 android:id="@+id/quizButton1"
@@ -81,10 +83,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="16sp" />
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/quizBtn2Frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
@@ -104,12 +108,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:text="TextView" />
+                android:text="Let's start!"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </FrameLayout>
+
         <FrameLayout
+            android:id="@+id/quizBtn3Frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            tools:visibility="invisible">
 
             <ImageButton
                 android:id="@+id/quizButton3"
@@ -126,7 +135,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </FrameLayout>
 
     </LinearLayout>
