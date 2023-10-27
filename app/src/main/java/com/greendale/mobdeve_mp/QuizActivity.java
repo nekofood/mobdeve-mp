@@ -13,7 +13,7 @@ import org.w3c.dom.Text;
 
 public class QuizActivity extends AppCompatActivity {
 
-    TextView quizBtnTxt1, quizBtnTxt2, quizBtnTxt3, quizTitle, quizDescriptionText;
+    TextView quizBtnTxt1, quizBtnTxt2, quizBtnTxt3, quizTitle, quizDescriptionText, quizpointTxt;
     FrameLayout quizBtnFrame1, quizBtnFrame2, quizBtnFrame3;
     ImageButton quizBtn1, quizBtn2, quizBtn3;
     int question = -1;
@@ -27,12 +27,14 @@ public class QuizActivity extends AppCompatActivity {
         quizBtnTxt1 = (TextView) findViewById(R.id.quizButton1Txt);
         quizBtnTxt2 = (TextView) findViewById(R.id.quizButton2Txt);
         quizBtnTxt3 = (TextView) findViewById(R.id.quizButton3Txt);
+        quizpointTxt = (TextView) findViewById(R.id.quizpointTxt);
         quizBtnFrame1 = (FrameLayout) findViewById(R.id.quizBtn1Frame);
         quizBtnFrame2 = (FrameLayout) findViewById(R.id.quizBtn2Frame);
         quizBtnFrame3 = (FrameLayout) findViewById(R.id.quizBtn3Frame);
         quizBtn1 = (ImageButton) findViewById(R.id.quizButton1);
         quizBtn2 = (ImageButton) findViewById(R.id.quizButton2);
         quizBtn3 = (ImageButton) findViewById(R.id.quizButton3);
+        quizpointTxt.setText((question+1) + "/10");
 
         quizBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +84,7 @@ public class QuizActivity extends AppCompatActivity {
         if (question < 9) {
             question = question + 1;
             setQuestion(question);
+            quizpointTxt.setText((question+1) + "/10");
         }
         //else do something, go to main screen, whatever
         else {

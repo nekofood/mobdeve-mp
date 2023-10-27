@@ -16,7 +16,7 @@
         android:text="Welcome to my Shop!"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#F3F3F3"
-        android:textSize="48sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
