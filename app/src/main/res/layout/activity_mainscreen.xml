@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Mainscreen">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background" />
+
+    <ImageButton
+        android:id="@+id/foodButton"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="-50dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Food"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_food"
+        app:layout_constraintBottom_toTopOf="@+id/menuButton"
+        app:layout_constraintEnd_toStartOf="@+id/menuButton" />
+
+    <ImageButton
+        android:id="@+id/waterButton"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="-15dp"
+        android:layout_marginBottom="20dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Water"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_water"
+        app:layout_constraintBottom_toTopOf="@+id/menuButton"
+        app:layout_constraintStart_toStartOf="@+id/menuButton" />
+
+    <ImageButton
+        android:id="@+id/careButton"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:layout_marginEnd="-14dp"
+        android:layout_marginBottom="20dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Care"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_heart"
+        app:layout_constraintBottom_toTopOf="@+id/menuButton"
+        app:layout_constraintEnd_toEndOf="@+id/menuButton" />
+
+    <ImageButton
+        android:id="@+id/fightButton"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginBottom="-50dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Fight"
+        android:cropToPadding="false"
+        android:onClick="OpenSesame"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_fight"
+        app:layout_constraintBottom_toTopOf="@+id/menuButton"
+        app:layout_constraintStart_toEndOf="@+id/menuButton" />
+
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="153dp"
+        android:layout_height="80dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Menu"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/menubutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="238dp"
+        android:layout_height="231dp"
+        android:layout_marginBottom="130dp"
+        android:contentDescription="Byte"
+        app:layout_constraintBottom_toTopOf="@+id/menuButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/birthdaybear" />
+
+    <FrameLayout
+        android:id="@+id/slideMenu"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="invisible"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/slidemenu" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imageButton8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:background="#00FFFFFF"
+                android:contentDescription="Settings"
+                android:src="@drawable/smbutton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/imageButton9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#00FFFFFF"
+                android:contentDescription="Settings"
+                android:src="@drawable/smbutton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton8" />
+
+            <ImageButton
+                android:id="@+id/imageButton10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#00FFFFFF"
+                android:contentDescription="Settings"
+                android:onClick="CloseSesame"
+                android:src="@drawable/sdbutton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton9" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/passion_one"
+                android:text="Shop"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
+                app:layout_constraintEnd_toEndOf="@+id/imageButton8"
+                app:layout_constraintStart_toStartOf="@+id/imageButton8"
+                app:layout_constraintTop_toTopOf="@+id/imageButton8" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/passion_one"
+                android:text="Settings"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButton9"
+                app:layout_constraintEnd_toEndOf="@+id/imageButton9"
+                app:layout_constraintStart_toStartOf="@+id/imageButton9"
+                app:layout_constraintTop_toTopOf="@+id/imageButton9" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

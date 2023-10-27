@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Battle">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@drawable/battlebackground" />
+
+    <ImageButton
+        android:id="@+id/pauseButton"
+        android:layout_width="94dp"
+        android:layout_height="82dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="pausebutton"
+        android:onClick="Pause"
+        android:scaleType="fitStart"
+        android:src="@drawable/corner_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/pauseIcon"
+        android:layout_width="37dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/pause" />
+
+    <ImageButton
+        android:id="@+id/ExtendDrive"
+        android:layout_width="351dp"
+        android:layout_height="76dp"
+        android:layout_marginBottom="35dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="ExtendDrive"
+        android:scaleType="fitCenter"
+        android:src="@drawable/edb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/bytecharacter"
+        android:layout_width="278dp"
+        android:layout_height="339dp"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.538"
+        app:srcCompat="@drawable/birthdaybearback" />
+
+    <ProgressBar
+        android:id="@+id/playerHP"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="352dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="15dp"
+        android:max="100"
+        android:progress="50"
+        android:progressDrawable="@android:drawable/progress_horizontal"
+        android:progressTint="#19D22C"
+        app:layout_constraintBottom_toTopOf="@+id/ExtendDrive"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/enemyHP"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="139dp"
+        android:layout_height="14dp"
+        android:layout_marginEnd="-20dp"
+        android:layout_marginBottom="10dp"
+        android:max="100"
+        android:progress="50"
+        android:progressDrawable="@android:drawable/progress_horizontal"
+        android:progressTint="#D60F0F"
+        app:layout_constraintBottom_toTopOf="@+id/enemybyte"
+        app:layout_constraintEnd_toEndOf="@+id/enemybyte" />
+
+    <ImageView
+        android:id="@+id/enemybyte"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="37dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/penguranger" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/passion_one"
+        android:text="EXTEND DRIVE"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ExtendDrive"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.714"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ExtendDrive" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/passion_one"
+        android:text="100/100"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/playerHP"
+        app:layout_constraintEnd_toEndOf="@+id/playerHP"
+        app:layout_constraintStart_toStartOf="@+id/playerHP"
+        app:layout_constraintTop_toTopOf="@+id/playerHP" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/passion_one"
+        android:text="EnemyName"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/enemyHP"
+        app:layout_constraintEnd_toEndOf="@+id/enemyHP"
+        app:layout_constraintStart_toStartOf="@+id/enemyHP" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="82dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="18dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/ExtendDrive"
+        app:layout_constraintStart_toStartOf="@+id/ExtendDrive"
+        app:layout_constraintTop_toTopOf="@+id/ExtendDrive"
+        app:srcCompat="@drawable/birthdaybear" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

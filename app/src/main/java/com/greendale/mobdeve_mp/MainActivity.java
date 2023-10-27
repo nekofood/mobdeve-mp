@@ -11,10 +11,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //For testing
-        Intent i = new Intent(MainActivity.this, ShopActivity.class);
-        startActivity(i);
-        finish();
-        //testing stuff ends here
     }
 }
