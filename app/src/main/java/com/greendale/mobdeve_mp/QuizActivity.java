@@ -3,6 +3,7 @@ package com.greendale.mobdeve_mp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -22,6 +23,17 @@ public class QuizActivity extends AppCompatActivity {
         quizBtn1 = (ImageButton) findViewById(R.id.quizButton1);
         quizBtn2 = (ImageButton) findViewById(R.id.quizButton2);
         quizBtn3 = (ImageButton) findViewById(R.id.quizButton3);
+
+        quizBtnTxt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (question == 0) {
+                    quizBtnTxt1.setVisibility(View.VISIBLE);
+                    quizBtnTxt3.setVisibility(View.VISIBLE);
+                    setQuestion(1);
+                }
+            }
+        });
     }
 
     //TODO: make QuizQuestions static later
