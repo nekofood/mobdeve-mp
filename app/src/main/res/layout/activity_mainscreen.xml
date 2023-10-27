@@ -102,7 +102,6 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:visibility="invisible"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 

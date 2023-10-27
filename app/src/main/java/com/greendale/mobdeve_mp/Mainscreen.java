@@ -18,16 +18,16 @@ public class Mainscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
         slideMenu = findViewById(R.id.slideMenu);
-        BottomSheetBehavior.from(slideMenu).setState(BottomSheetBehavior.STATE_HIDDEN);
         fightButton = findViewById(R.id.fightButton);
+        slideMenu.setVisibility(View.GONE);
         }
     public void OpenSesame(View v)
     {
-        BottomSheetBehavior.from(slideMenu).setState(BottomSheetBehavior.STATE_EXPANDED);
+        slideMenu.setVisibility(View.VISIBLE);
     }
     public void CloseSesame(View v)
     {
-        BottomSheetBehavior.from(slideMenu).setState(BottomSheetBehavior.STATE_HIDDEN);
+       slideMenu.setVisibility(View.GONE);
     }
     public void Battle(View v){
         Intent intent = new Intent(Mainscreen.this, Battle.class);
