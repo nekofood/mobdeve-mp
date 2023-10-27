@@ -13,8 +13,10 @@
         android:src="@tools:sample/avatars"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@drawable/battlebackground" />
 
     <ImageButton
@@ -49,7 +51,7 @@
         android:background="#00FFFFFF"
         android:contentDescription="ExtendDrive"
         android:scaleType="fitCenter"
-        android:src="@drawable/EDB"
+        android:src="@drawable/edb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -65,7 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.538"
-        app:srcCompat="@drawable/BirthdayBearBack" />
+        app:srcCompat="@drawable/birthdaybearback" />
 
     <ProgressBar
         android:id="@+id/playerHP"
@@ -103,7 +105,7 @@
         android:layout_marginEnd="37dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/PenguRanger" />
+        app:srcCompat="@drawable/penguranger" />
 
     <TextView
         android:id="@+id/textView"
@@ -156,6 +158,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/ExtendDrive"
         app:layout_constraintStart_toStartOf="@+id/ExtendDrive"
         app:layout_constraintTop_toTopOf="@+id/ExtendDrive"
-        app:srcCompat="@drawable/BirthdayBear" />
+        app:srcCompat="@drawable/birthdaybear" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Background" />
+        app:srcCompat="@drawable/background" />
 
     <ImageButton
         android:id="@+id/foodButton"
@@ -96,7 +96,7 @@
         app:layout_constraintBottom_toTopOf="@+id/menuButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/BirthdayBear" />
+        app:srcCompat="@drawable/birthdaybear" />
 
     <FrameLayout
         android:id="@+id/slideMenu"
