@@ -51,6 +51,9 @@ public class QuizActivity extends AppCompatActivity {
                     quizBtnFrame3.setVisibility(View.VISIBLE);
                     nextQuestion();
                 }
+                else {
+                    nextQuestion();
+                }
             }
         });
 
