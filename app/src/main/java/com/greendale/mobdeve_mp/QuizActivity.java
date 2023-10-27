@@ -2,6 +2,7 @@ package com.greendale.mobdeve_mp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -11,7 +12,7 @@ public class QuizActivity extends AppCompatActivity {
 
     TextView quizBtnTxt1, quizBtnTxt2, quizBtnTxt3, quizTitle, quizDescriptionText;
     ImageButton quizBtn1, quizBtn2, quizBtn3;
-    int question = 0;
+    int question = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +25,31 @@ public class QuizActivity extends AppCompatActivity {
         quizBtn2 = (ImageButton) findViewById(R.id.quizButton2);
         quizBtn3 = (ImageButton) findViewById(R.id.quizButton3);
 
+        quizBtnTxt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (question != -1) {
+                    nextQuestion();
+                }
+            }
+        });
+
         quizBtnTxt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (question == 0) {
+                if (question == -1) {
                     quizBtnTxt1.setVisibility(View.VISIBLE);
                     quizBtnTxt3.setVisibility(View.VISIBLE);
-                    setQuestion(1);
+                    nextQuestion();
+                }
+            }
+        });
+
+        quizBtnTxt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (question != -1) {
+                    nextQuestion();
                 }
             }
         });
@@ -43,6 +62,20 @@ public class QuizActivity extends AppCompatActivity {
         quizBtnTxt1.setText(question.questionAnswers[q][0]);
         quizBtnTxt2.setText(question.questionAnswers[q][1]);
         quizBtnTxt3.setText(question.questionAnswers[q][2]);
+    }
+
+    private void nextQuestion() {
+        //advance to next question if not yet final question
+        if (question < 9) {
+            question = question + 1;
+            setQuestion(question);
+        }
+        //else do something, go to main screen, whatever
+        else {
+            Intent i = new Intent(QuizActivity.this, Mainscreen.class);
+            startActivity(i);
+            finish();
+        }
     }
     public class QuizQuestions {
         String[] questions;
