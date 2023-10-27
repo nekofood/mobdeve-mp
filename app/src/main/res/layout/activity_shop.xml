@@ -12,8 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Welcome to the Shop!"
-        android:textSize="24sp"
+        android:fontFamily="@font/passion_one"
+        android:text="Welcome to my Shop!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#F3F3F3"
+        android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +114,7 @@
                 android:linksClickable="false"
                 android:longClickable="false"
                 android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -140,6 +144,7 @@
                 android:linksClickable="false"
                 android:longClickable="false"
                 android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -168,6 +173,7 @@
                 android:linksClickable="false"
                 android:longClickable="false"
                 android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
