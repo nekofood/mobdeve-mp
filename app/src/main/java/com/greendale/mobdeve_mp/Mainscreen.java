@@ -56,6 +56,10 @@ public class Mainscreen extends AppCompatActivity {
         Intent intent = new Intent(Mainscreen.this, ShopActivity.class);
         startActivity(intent);
     }
+    public void GoToSettings(View v){
+        Intent intent = new Intent(Mainscreen.this, Settings.class);
+        startActivity(intent);
+    }
     public void giveFood(View v){
         if (!foodToggle){
             foodToggle = true;

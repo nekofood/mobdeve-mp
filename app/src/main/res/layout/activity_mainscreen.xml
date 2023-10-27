@@ -180,6 +180,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#00FFFFFF"
                 android:contentDescription="Settings"
+                android:onClick="GoToSettings"
                 android:src="@drawable/smbutton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
