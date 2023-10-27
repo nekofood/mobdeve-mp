@@ -10,13 +10,14 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@drawable/battlebackground" />
+        app:srcCompat="@drawable/battlebackground" />
 
     <ImageButton
         android:id="@+id/pauseButton"
@@ -37,9 +38,9 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/pause" />
+        app:layout_constraintStart_toStartOf="@+id/pauseButton"
+        app:layout_constraintTop_toTopOf="@+id/pauseButton"
+        app:srcCompat="@drawable/pause" />
 
     <ImageButton
         android:id="@+id/ExtendDrive"
@@ -111,6 +112,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/passion_one"
         android:text="EXTEND DRIVE"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/ExtendDrive"
@@ -125,6 +127,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/passion_one"
         android:text="100/100"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/playerHP"
@@ -141,6 +144,7 @@
         android:layout_marginBottom="2dp"
         android:fontFamily="@font/passion_one"
         android:text="EnemyName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/enemyHP"
@@ -162,6 +166,7 @@
         android:id="@+id/battlePopup"
         android:layout_width="350dp"
         android:layout_height="350dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -177,8 +182,7 @@
                 android:id="@+id/imageView9"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@tools:sample/avatars"
-                app:srcCompat="@drawable/fullpopup" />
+                android:src="@drawable/popupfull" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -187,6 +191,7 @@
                 android:layout_marginBottom="180dp"
                 android:fontFamily="@font/passion_one"
                 android:text="Exit the match?"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView9"
                 app:layout_constraintEnd_toEndOf="@+id/imageView9"
@@ -232,6 +237,7 @@
                 android:layout_marginBottom="21dp"
                 android:fontFamily="@font/passion_one"
                 android:text="Exit Match"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/exitMatchButton"
                 app:layout_constraintEnd_toEndOf="@+id/exitMatchButton"
@@ -248,6 +254,7 @@
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/passion_one"
                 android:text="Resume Match"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/resumeMatchButton"
                 app:layout_constraintEnd_toEndOf="@+id/resumeMatchButton"

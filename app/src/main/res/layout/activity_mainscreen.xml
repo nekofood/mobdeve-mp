@@ -10,7 +10,7 @@
         android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +103,7 @@
         android:id="@+id/slideMenu"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -165,6 +165,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/passion_one"
                 android:text="Shop"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton8"
@@ -177,6 +178,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/passion_one"
                 android:text="Settings"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageButton9"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton9"
