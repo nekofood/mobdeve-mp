@@ -7,7 +7,7 @@
     tools:context=".Mainscreen">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/mainscreenBg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -92,7 +92,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/bytePet"
         android:layout_width="238dp"
         android:layout_height="231dp"
         android:layout_marginBottom="130dp"
@@ -108,9 +108,9 @@
         android:layout_height="100dp"
         android:layout_marginBottom="50dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="@+id/bytePet"
+        app:layout_constraintEnd_toEndOf="@+id/bytePet"
+        app:layout_constraintStart_toStartOf="@+id/bytePet"
         android:src="@drawable/heart" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -160,7 +160,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/imageButton8"
+                android:id="@+id/slideShopButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
@@ -174,7 +174,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/imageButton9"
+                android:id="@+id/slideSettingsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -185,10 +185,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageButton8" />
+                app:layout_constraintTop_toBottomOf="@+id/slideShopButton" />
 
             <ImageButton
-                android:id="@+id/imageButton10"
+                android:id="@+id/slideHideButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -199,10 +199,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageButton9" />
+                app:layout_constraintTop_toBottomOf="@+id/slideSettingsButton" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/slideShopBtnTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/passion_one"
@@ -210,13 +210,13 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#222222"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton8"
-                app:layout_constraintStart_toStartOf="@+id/imageButton8"
-                app:layout_constraintTop_toTopOf="@+id/imageButton8" />
+                app:layout_constraintBottom_toBottomOf="@+id/slideShopButton"
+                app:layout_constraintEnd_toEndOf="@+id/slideShopButton"
+                app:layout_constraintStart_toStartOf="@+id/slideShopButton"
+                app:layout_constraintTop_toTopOf="@+id/slideShopButton" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/slideSettingsBtnTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/passion_one"
@@ -224,10 +224,10 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#222222"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton9"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton9"
-                app:layout_constraintStart_toStartOf="@+id/imageButton9"
-                app:layout_constraintTop_toTopOf="@+id/imageButton9" />
+                app:layout_constraintBottom_toBottomOf="@+id/slideSettingsButton"
+                app:layout_constraintEnd_toEndOf="@+id/slideSettingsButton"
+                app:layout_constraintStart_toStartOf="@+id/slideSettingsButton"
+                app:layout_constraintTop_toTopOf="@+id/slideSettingsButton" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

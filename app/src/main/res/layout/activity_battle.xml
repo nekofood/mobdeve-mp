@@ -7,7 +7,7 @@
     tools:context=".Battle">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/battleBg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -107,7 +107,7 @@
         app:srcCompat="@drawable/penguranger" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/battleExtDriveText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/passion_one"
@@ -122,7 +122,7 @@
         app:layout_constraintTop_toTopOf="@+id/ExtendDrive" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/battlePlayerHp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/passion_one"
@@ -136,7 +136,7 @@
         app:layout_constraintTop_toTopOf="@+id/playerHP" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/battleEnemyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
@@ -152,7 +152,7 @@
         app:layout_constraintStart_toStartOf="@+id/enemyHP" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/battleExtDriveIcon"
         android:layout_width="82dp"
         android:layout_height="76dp"
         android:layout_marginStart="18dp"
@@ -172,20 +172,21 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.5"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/battlePauseWIndow"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/popupfull" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/battlePauseHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="180dp"
@@ -193,13 +194,13 @@
                 android:text="Exit the match?"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="34sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-                app:layout_constraintEnd_toEndOf="@+id/imageView9"
-                app:layout_constraintStart_toStartOf="@+id/imageView9"
-                app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                app:layout_constraintBottom_toBottomOf="@+id/battlePauseWIndow"
+                app:layout_constraintEnd_toEndOf="@+id/battlePauseWIndow"
+                app:layout_constraintStart_toStartOf="@+id/battlePauseWIndow"
+                app:layout_constraintTop_toTopOf="@+id/battlePauseWIndow" />
 
             <ImageButton
-                android:id="@+id/exitMatchButton"
+                android:id="@+id/battleExitMatchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -207,12 +208,12 @@
                 android:contentDescription="YesExit"
                 android:onClick="Exit"
                 android:src="@drawable/smbutton"
-                app:layout_constraintEnd_toEndOf="@+id/imageView9"
-                app:layout_constraintStart_toStartOf="@+id/imageView9"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintEnd_toEndOf="@+id/battlePauseWIndow"
+                app:layout_constraintStart_toStartOf="@+id/battlePauseWIndow"
+                app:layout_constraintTop_toBottomOf="@+id/battlePauseHeader" />
 
             <ImageButton
-                android:id="@+id/resumeMatchButton"
+                android:id="@+id/battleResumeMatchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="53dp"
@@ -222,13 +223,13 @@
                 android:contentDescription="ResumeGame"
                 android:onClick="Resume"
                 android:src="@drawable/smbutton"
-                app:layout_constraintEnd_toEndOf="@+id/imageView9"
+                app:layout_constraintEnd_toEndOf="@+id/battlePauseWIndow"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/imageView9"
-                app:layout_constraintTop_toBottomOf="@+id/exitMatchButton" />
+                app:layout_constraintStart_toStartOf="@+id/battlePauseWIndow"
+                app:layout_constraintTop_toBottomOf="@+id/battleExitMatchButton" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/battleExitMatchTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="149dp"
@@ -239,13 +240,13 @@
                 android:text="Exit Match"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="@+id/exitMatchButton"
-                app:layout_constraintEnd_toEndOf="@+id/exitMatchButton"
-                app:layout_constraintStart_toStartOf="@+id/imageView9"
-                app:layout_constraintTop_toTopOf="@+id/exitMatchButton" />
+                app:layout_constraintBottom_toBottomOf="@+id/battleExitMatchButton"
+                app:layout_constraintEnd_toEndOf="@+id/battleExitMatchButton"
+                app:layout_constraintStart_toStartOf="@+id/battlePauseWIndow"
+                app:layout_constraintTop_toTopOf="@+id/battleExitMatchButton" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/battleResumeMatchTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="93dp"
@@ -256,10 +257,10 @@
                 android:text="Resume Match"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="@+id/resumeMatchButton"
-                app:layout_constraintEnd_toEndOf="@+id/resumeMatchButton"
-                app:layout_constraintStart_toStartOf="@+id/resumeMatchButton"
-                app:layout_constraintTop_toTopOf="@+id/resumeMatchButton" />
+                app:layout_constraintBottom_toBottomOf="@+id/battleResumeMatchButton"
+                app:layout_constraintEnd_toEndOf="@+id/battleResumeMatchButton"
+                app:layout_constraintStart_toStartOf="@+id/battleResumeMatchButton"
+                app:layout_constraintTop_toTopOf="@+id/battleResumeMatchButton" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

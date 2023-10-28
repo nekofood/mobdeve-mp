@@ -17,8 +17,8 @@ public class Battle extends AppCompatActivity {
         setContentView(R.layout.activity_battle);
         pauseButton = findViewById(R.id.pauseButton);
         battlePopup = findViewById(R.id.battlePopup);
-        exitMatchButton = findViewById(R.id.exitMatchButton);
-        resumeMatchButton = findViewById(R.id.resumeMatchButton);
+        exitMatchButton = findViewById(R.id.battleExitMatchButton);
+        resumeMatchButton = findViewById(R.id.battleResumeMatchButton);
         battlePopup.setVisibility(View.GONE);
     }
     public void Pause(View view) {
