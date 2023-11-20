@@ -17,6 +17,7 @@ public class QuizActivity extends AppCompatActivity {
     FrameLayout quizBtnFrame1, quizBtnFrame2, quizBtnFrame3;
     ImageButton quizBtn1, quizBtn2, quizBtn3;
     int question = -1;
+    int fun, fiery, focused;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (question != -1) {
                     nextQuestion();
+                    fun++;
                 }
             }
         });
@@ -52,9 +54,11 @@ public class QuizActivity extends AppCompatActivity {
                     quizBtnFrame1.setVisibility(View.VISIBLE);
                     quizBtnFrame3.setVisibility(View.VISIBLE);
                     nextQuestion();
+                    fiery++;
                 }
                 else {
                     nextQuestion();
+                    fiery++;
                 }
             }
         });
@@ -64,6 +68,7 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (question != -1) {
                     nextQuestion();
+                    focused++;
                 }
             }
         });
@@ -88,6 +93,22 @@ public class QuizActivity extends AppCompatActivity {
         }
         //else do something, go to main screen, whatever
         else {
+            if (fun > fiery && fun > focused)
+            {
+                //Set local storage variables
+                //species = "Birthday Bear"
+                //isQuizDone = True
+            }
+            if (fiery > fun && fiery > focused){
+                //Set local storage variables
+                //species = "PenguRanger"
+                //isQuizDone = True
+            }
+            if (focused > fun && focused > fiery){
+                //Set local storage variables
+                //species = "Salacommander"
+                //isQuizDone = True
+            }
             Intent i = new Intent(QuizActivity.this, Mainscreen.class);
             startActivity(i);
             finish();
