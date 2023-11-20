@@ -106,22 +106,25 @@ public class QuizActivity extends AppCompatActivity {
             if (fun > fiery && fun > focused)
             {
                 editor.putString("BSPECIES","Birthday Bear");
+                editor.apply();
                 editor.putBoolean("ISQUIZDONE",true);
                 editor.apply();
                 //Set local storage variables
                 //species = "Birthday Bear"
                 //isQuizDone = True
             }
-            if (fiery > fun && fiery > focused){
+            else if (fiery > fun && fiery > focused){
                 editor.putString("BSPECIES","PenguRanger");
+                editor.apply();
                 editor.putBoolean("ISQUIZDONE",true);
                 editor.apply();
                 //Set local storage variables
                 //species = "PenguRanger"
                 //isQuizDone = True
             }
-            if (focused > fun && focused > fiery){
+            else {
                 editor.putString("BSPECIES","Salacommander");
+                editor.apply();
                 editor.putBoolean("ISQUIZDONE",true);
                 editor.apply();
                 //Set local storage variables

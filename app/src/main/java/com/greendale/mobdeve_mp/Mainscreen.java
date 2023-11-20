@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -23,6 +24,7 @@ public class Mainscreen extends AppCompatActivity {
     ImageButton fightButton, foodButton, waterButton, careButton;
     ImageView bowl, container,heartIndicator, bytePet;
     Boolean foodToggle,waterToggle,careToggle;
+    TextView SharedPrefTest;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class Mainscreen extends AppCompatActivity {
         bowl = (ImageView) findViewById(R.id.bowl);
         container = (ImageView) findViewById(R.id.container);
         heartIndicator = (ImageView) findViewById(R.id.heartIndicator);
+        SharedPrefTest = (TextView) findViewById(R.id.SharedPrefTest);
         slideMenu.setVisibility(View.GONE);
         graphicIndicator.setVisibility(View.GONE);
         foodToggle = false;
@@ -45,6 +48,7 @@ public class Mainscreen extends AppCompatActivity {
         careToggle = false;
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
+        SharedPrefTest.setText((sharedPreferences.getString("BSPECIES","A")));
         if (Species.equals("Birthday Bear")){
                 bytePet.setImageResource(R.drawable.birthdaybear);
         } else if (Species.equals("PenguRanger")) {

@@ -113,6 +113,16 @@
         app:layout_constraintStart_toStartOf="@+id/bytePet"
         android:src="@drawable/heart" />
 
+    <TextView
+        android:id="@+id/SharedPrefTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="187dp"
+        android:layout_marginTop="166dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainscreenBg" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/graphicIndicator"
         android:layout_width="match_parent"
@@ -138,6 +148,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/megabites" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
