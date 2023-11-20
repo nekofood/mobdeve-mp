@@ -19,7 +19,7 @@ public class QuizActivity extends AppCompatActivity {
     FrameLayout quizBtnFrame1, quizBtnFrame2, quizBtnFrame3;
     ImageButton quizBtn1, quizBtn2, quizBtn3;
     int question = -1;
-    int fun, fiery, focused;
+    int fun, fiery, focused = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedPref = getSharedPreferences("SHARED_PREFERENCES", MODE_PRIVATE);
@@ -29,9 +29,9 @@ public class QuizActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
 
         quizDescriptionText = (TextView) findViewById(R.id.quizDescriptionText);
         quizBtnTxt1 = (TextView) findViewById(R.id.quizButton1Txt);
