@@ -20,6 +20,11 @@ public class QuizActivity extends AppCompatActivity {
     int fun, fiery, focused;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /*if (isQuizDone){
+        Intent i = new Intent(QuizActivity.this, Mainscreen.class);
+            startActivity(i);
+            finish();}
+        * */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
