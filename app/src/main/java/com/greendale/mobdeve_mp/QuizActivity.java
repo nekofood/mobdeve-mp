@@ -3,6 +3,7 @@ package com.greendale.mobdeve_mp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -13,7 +14,7 @@ import org.w3c.dom.Text;
 
 public class QuizActivity extends AppCompatActivity {
 
-    TextView quizBtnTxt1, quizBtnTxt2, quizBtnTxt3, quizTitle, quizDescriptionText, quizpointTxt;
+    TextView quizBtnTxt1, quizBtnTxt2, quizBtnTxt3, quizTitle, quizDescriptionText, quizpointTxt, Test;
     FrameLayout quizBtnFrame1, quizBtnFrame2, quizBtnFrame3;
     ImageButton quizBtn1, quizBtn2, quizBtn3;
     int question = -1;
@@ -34,6 +35,7 @@ public class QuizActivity extends AppCompatActivity {
         quizBtnTxt2 = (TextView) findViewById(R.id.quizButton2Txt);
         quizBtnTxt3 = (TextView) findViewById(R.id.quizButton3Txt);
         quizpointTxt = (TextView) findViewById(R.id.quizpointTxt);
+        Test = (TextView) findViewById(R.id.Test);
         quizBtnFrame1 = (FrameLayout) findViewById(R.id.quizBtn1Frame);
         quizBtnFrame2 = (FrameLayout) findViewById(R.id.quizBtn2Frame);
         quizBtnFrame3 = (FrameLayout) findViewById(R.id.quizBtn3Frame);
@@ -90,6 +92,9 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void nextQuestion() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Test.setText ("Fun: " +fun + " " + "Fiery: "+ fiery + " " + "Focused: " + focused);
         //advance to next question if not yet final question
         if (question < 9) {
             question = question + 1;
@@ -100,16 +105,25 @@ public class QuizActivity extends AppCompatActivity {
         else {
             if (fun > fiery && fun > focused)
             {
+                editor.putString("BSPECIES","Birthday Bear");
+                editor.putBoolean("ISQUIZDONE",true);
+                editor.apply();
                 //Set local storage variables
                 //species = "Birthday Bear"
                 //isQuizDone = True
             }
             if (fiery > fun && fiery > focused){
+                editor.putString("BSPECIES","PenguRanger");
+                editor.putBoolean("ISQUIZDONE",true);
+                editor.apply();
                 //Set local storage variables
                 //species = "PenguRanger"
                 //isQuizDone = True
             }
             if (focused > fun && focused > fiery){
+                editor.putString("BSPECIES","Salacommander");
+                editor.putBoolean("ISQUIZDONE",true);
+                editor.apply();
                 //Set local storage variables
                 //species = "Salacommander"
                 //isQuizDone = True
