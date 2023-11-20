@@ -2,6 +2,7 @@ package com.greendale.mobdeve_mp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,11 +22,13 @@ public class QuizActivity extends AppCompatActivity {
     int fun, fiery, focused;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*if (isQuizDone){
-        Intent i = new Intent(QuizActivity.this, Mainscreen.class);
+        SharedPreferences sharedPref = getSharedPreferences("SHARED_PREFERENCES", MODE_PRIVATE);
+        Boolean isQuizDone = sharedPref.getBoolean("ISQUIZDONE", false); //default to "quiz not done yet"
+        if (isQuizDone) {
+            Intent i = new Intent(QuizActivity.this, Mainscreen.class);
             startActivity(i);
-            finish();}
-        * */
+            finish();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
