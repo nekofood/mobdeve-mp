@@ -143,13 +143,46 @@ public class QuizActivity extends AppCompatActivity {
             questions = new String[10];
             questionAnswers = new String[10][3];
 
-           //make some placeholders
-            for (int i = 0; i < 10; i++) {
-                questions[i] = "Question " + (i + 1);
-                questionAnswers[i][0] = "Answer 1";
-                questionAnswers[i][1] = "Answer 2";
-                questionAnswers[i][2] = "Answer 3";
-            }
+            questions[0] = "You've won a small lottery and have money to spend. What do you do?";
+            questionAnswers[0][0] = "Throw a party";
+            questionAnswers[0][1] = "Donate it to charity";
+            questionAnswers[0][2] = "Invest it";
+            questions[1] = "You have the day off from school, how do you spend your day?";
+            questionAnswers[1][0] = "Play video games";
+            questionAnswers[1][1] = "Work out";
+            questionAnswers[1][2] = "Study and do homework";
+            questions[2] = "There's a long walk ahead of you to get to your destination. What route do you take?";
+            questionAnswers[2][0] = "The scenic route";
+            questionAnswers[2][1] = "The challenging route";
+            questionAnswers[2][2] = "The shortest route";
+            questions[3] = "Your car is broken down and you're stranded. Who do you call?";
+            questionAnswers[3][0] = "A close friend";
+            questionAnswers[3][1] = "A family member";
+            questionAnswers[3][2] = "A mechanic";
+            questions[4] = "You want to go to the park, but it's too far to walk. What do you use to get there?";
+            questionAnswers[4][0] = "A skateboard";
+            questionAnswers[4][1] = "A bike";
+            questionAnswers[4][2] = "Public transport";
+            questions[5] = "You're at the cinema, what movie do you watch?";
+            questionAnswers[5][0] = "A wholesome comedy";
+            questionAnswers[5][1] = "A blockbuster action movie";
+            questionAnswers[5][2] = "An artistic drama";
+            questions[6] = "You have a free ticket to a nice vacation, where do you go?";
+            questionAnswers[6][0] = "A vibrant city";
+            questionAnswers[6][1] = "A historical site";
+            questionAnswers[6][2] = "A relaxing beach";
+            questions[7] = "What souvenir do you buy before going home?";
+            questionAnswers[7][0] = "A t-shirt with a cool design";
+            questionAnswers[7][1] = "A unique tattoo";
+            questionAnswers[7][2] = "A locally made handicraft";
+            questions[8] = "You're stuck in traffic in your car and running late, what do you do?";
+            questionAnswers[8][0] = "Turn up the music and relax";
+            questionAnswers[8][1] = "Honk on the wheel repeatedly";
+            questionAnswers[8][2] = "Plan your day around the delay";
+            questions[9] = "You find a wallet on the street, what do you do?";
+            questionAnswers[9][0] = "Keep the money";
+            questionAnswers[9][1] = "Look for the owner";
+            questionAnswers[9][2] = "Give it to the police station";
         }
 
         public String[] getQuestions() {
