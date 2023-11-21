@@ -25,11 +25,19 @@ public class Mainscreen extends AppCompatActivity {
     ImageView bowl, container,heartIndicator, bytePet;
     Boolean foodToggle,waterToggle,careToggle;
     TextView SharedPrefTest;
+
+    int needHunger, needThirst, needLove = 100; //fallback value is 100
+
+    final int MAX_HUNGER = 100;
+    final int MAX_THIRST = 100;
+    final int MAX_LOVE = 100;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
+
         slideMenu = (FrameLayout) findViewById(R.id.slideMenu);
         graphicIndicator = (ConstraintLayout) findViewById(R.id.graphicIndicator);
         fightButton = (ImageButton) findViewById(R.id.fightButton);
@@ -46,20 +54,33 @@ public class Mainscreen extends AppCompatActivity {
         foodToggle = false;
         waterToggle = false;
         careToggle = false;
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
-        SharedPrefTest.setText((sharedPreferences.getString("BSPECIES","A")));
-        if (Species.equals("Birthday Bear")){
+
+        SharedPrefTest.setText(Species);
+        switch (Species) {
+            case "Birthday Bear":
                 bytePet.setImageResource(R.drawable.birthdaybear);
-        } else if (Species.equals("PenguRanger")) {
-            bytePet.setImageResource(R.drawable.penguranger);
+                break;
+            case "PenguRanger":
+                bytePet.setImageResource(R.drawable.penguranger);
+                break;
+            case "Salacommander":
+                bytePet.setImageResource(R.drawable.salacommander);
+                break;
         }
-        else bytePet.setImageResource(R.drawable.salacommander);
-        if ((sharedPreferences.getInt("BCHUNGER", 0) == 1) && (sharedPreferences.getInt("BCTHIRST ", 1)==0)){
+
+        //load current hunger/thirst/love values into ints
+        loadData();
+
+        //pet is gone if hunger and thirst is 0
+        if (needHunger == 0 && needThirst == 0){
             bytePet.setVisibility(View.INVISIBLE);
         }
         else bytePet.setVisibility(View.VISIBLE);
-        }
+
+    }
     public void OpenSesame(View v)
     {
         slideMenu.setVisibility(View.VISIBLE);
@@ -81,11 +102,11 @@ public class Mainscreen extends AppCompatActivity {
         startActivity(intent);
     }
     public void giveFood(View v){
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
         if (!foodToggle){
             foodToggle = true;
             graphicIndicator.setVisibility(View.VISIBLE);
-            if (sharedPreferences.getInt("BCHUNGER", 0) < sharedPreferences.getInt("BMHUNGER", 0)) //TODO: replace this with sharedpreference food variable
+            //only allow feeding if hunger < max
+            if (needHunger < MAX_HUNGER)
             {
                 bowl.setImageResource(R.drawable.foodbowlempty);
                 container.setImageResource(R.drawable.megabites);
@@ -105,11 +126,11 @@ public class Mainscreen extends AppCompatActivity {
         }
     }
     public void giveWater(View v){
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
         if (!waterToggle){
             waterToggle = true;
             graphicIndicator.setVisibility(View.VISIBLE);
-            if (sharedPreferences.getInt("BCTHIRST", 0) < sharedPreferences.getInt("BMTHIRST", 0)) //TODO: replace this with sharedpreference food variable
+            //only allow giving water if thirst < max
+            if (needThirst < MAX_THIRST)
             {
                 bowl.setImageResource(R.drawable.waterbowlempty);
                 container.setImageResource(R.drawable.waterpitcher);
@@ -129,11 +150,9 @@ public class Mainscreen extends AppCompatActivity {
         }
     }
     public void giveCare(View v){
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
-        Integer heart = sharedPreferences.getInt("BCLOVE", 0); //get BCLOVE
         ViewGroup.LayoutParams heartsize = heartIndicator.getLayoutParams();
-        heartsize.height = heart;
-        heartsize.width = heart;
+        heartsize.height = needLove;
+        heartsize.width = needLove;
         heartIndicator.setLayoutParams(heartsize);
         if (!careToggle){
             careToggle = true;
@@ -149,4 +168,45 @@ public class Mainscreen extends AppCompatActivity {
             graphicIndicator.setVisibility(View.GONE);
         }
     }
+
+    /**
+     * Save data to SharedPreferences when switching activities
+     */
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt("BCHUNGER", needHunger);
+        editor.putInt("BCTHIRST", needThirst);
+        editor.putInt("BCLOVE", needLove);
+        editor.apply();
     }
+
+    /**
+     * Load data from SharedPreferences. Honestly not sure where this is needed
+     */
+    public void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
+
+        needHunger = sharedPreferences.getInt("BCHUNGER", 100);
+        needThirst = sharedPreferences.getInt("BCTHURST", 100);
+        needLove = sharedPreferences.getInt("BCLOVE", 100);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveData();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveData();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        saveData();
+    }
+}

@@ -10,6 +10,7 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
     //settings
+    /** Maybe don't use these
     public static final Boolean ISQUIZDONE = false;
     public static final Boolean ISNOTIFSON = true;
     //Bytes Current Attributes
@@ -21,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     public static final Integer BMTHIRST = 100;
     public static final Integer BMLOVE = 100;
     //species
-    public static final String BSPECIES = "Birthday Bear";
+    //public static final String BSPECIES = "Birthday Bear";
+     **/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

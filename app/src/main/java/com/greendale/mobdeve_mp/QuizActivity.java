@@ -2,6 +2,7 @@ package com.greendale.mobdeve_mp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,17 +19,19 @@ public class QuizActivity extends AppCompatActivity {
     FrameLayout quizBtnFrame1, quizBtnFrame2, quizBtnFrame3;
     ImageButton quizBtn1, quizBtn2, quizBtn3;
     int question = -1;
-    int fun, fiery, focused;
+    int fun, fiery, focused = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*if (isQuizDone){
-        Intent i = new Intent(QuizActivity.this, Mainscreen.class);
+        SharedPreferences sharedPref = getSharedPreferences("SHARED_PREFERENCES", MODE_PRIVATE);
+        Boolean isQuizDone = sharedPref.getBoolean("ISQUIZDONE", false); //default to "quiz not done yet"
+        if (isQuizDone) {
+            Intent i = new Intent(QuizActivity.this, Mainscreen.class);
             startActivity(i);
-            finish();}
-        * */
+            finish();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
 
         quizDescriptionText = (TextView) findViewById(R.id.quizDescriptionText);
         quizBtnTxt1 = (TextView) findViewById(R.id.quizButton1Txt);
@@ -61,7 +64,6 @@ public class QuizActivity extends AppCompatActivity {
                     quizBtnFrame1.setVisibility(View.VISIBLE);
                     quizBtnFrame3.setVisibility(View.VISIBLE);
                     nextQuestion();
-                    fiery++;
                 }
                 else {
                     nextQuestion();
@@ -81,7 +83,6 @@ public class QuizActivity extends AppCompatActivity {
         });
     }
 
-    //TODO: make QuizQuestions static later
     private void setQuestion(int q) {
         QuizQuestions question = new QuizQuestions();
         String[][] answers = question.getQuestionAnswers();
@@ -92,6 +93,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void nextQuestion() {
+        String finalSpecies = "Birthday Bear"; //Fallback value
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Test.setText ("Fun: " +fun + " " + "Fiery: "+ fiery + " " + "Focused: " + focused);
@@ -103,39 +105,32 @@ public class QuizActivity extends AppCompatActivity {
         }
         //else do something, go to main screen, whatever
         else {
+            //Decide which pet the user is assigned based on stats
             if (fun > fiery && fun > focused)
             {
-                editor.putString("BSPECIES","Birthday Bear");
-                editor.apply();
-                editor.putBoolean("ISQUIZDONE",true);
-                editor.apply();
-                //Set local storage variables
-                //species = "Birthday Bear"
-                //isQuizDone = True
+                finalSpecies = "Birthday Bear";
             }
             else if (fiery > fun && fiery > focused){
-                editor.putString("BSPECIES","PenguRanger");
-                editor.apply();
-                editor.putBoolean("ISQUIZDONE",true);
-                editor.apply();
-                //Set local storage variables
-                //species = "PenguRanger"
-                //isQuizDone = True
+                finalSpecies = "PenguRanger";
             }
-            else {
-                editor.putString("BSPECIES","Salacommander");
-                editor.apply();
-                editor.putBoolean("ISQUIZDONE",true);
-                editor.apply();
-                //Set local storage variables
-                //species = "Salacommander"
-                //isQuizDone = True
+            else if (focused > fun && focused > fiery) {
+                finalSpecies = "Salacommander";
             }
+            editor.putString("BSPECIES", finalSpecies);
+            editor.putBoolean("ISQUIZDONE",true);
+            //Set up the other important stats
+            editor.putBoolean("ISNOTIFSON", true);
+            editor.putInt("BCHUNGER", 100);
+            editor.putInt("BCTHIRST", 100);
+            editor.putInt("BCLOVE", 100);
+            editor.apply();
+
             Intent i = new Intent(QuizActivity.this, Mainscreen.class);
             startActivity(i);
             finish();
         }
     }
+    //Helper object containing all the quiz questions
     public class QuizQuestions {
         String[] questions;
         String[][] questionAnswers;
