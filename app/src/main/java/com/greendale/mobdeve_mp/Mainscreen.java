@@ -170,4 +170,34 @@ public class Mainscreen extends AppCompatActivity {
             graphicIndicator.setVisibility(View.GONE);
         }
     }
+
+    /**
+     * Save data to SharedPreferences when switching activities
+     */
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt("BCHUNGER", needHunger);
+        editor.putInt("BCTHIRST", needThirst);
+        editor.putInt("BCLOVE", needLove);
+        editor.apply();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveData();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveData();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        saveData();
+    }
+}
