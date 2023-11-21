@@ -55,7 +55,7 @@ public class Mainscreen extends AppCompatActivity {
         waterToggle = false;
         careToggle = false;
 
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
 
         SharedPrefTest.setText(Species);
@@ -173,7 +173,7 @@ public class Mainscreen extends AppCompatActivity {
      * Save data to SharedPreferences when switching activities
      */
     public void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putInt("BCHUNGER", needHunger);
@@ -186,7 +186,7 @@ public class Mainscreen extends AppCompatActivity {
      * Load data from SharedPreferences. Honestly not sure where this is needed
      */
     public void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
 
         needHunger = sharedPreferences.getInt("BCHUNGER", 100);
         needThirst = sharedPreferences.getInt("BCTHURST", 100);
