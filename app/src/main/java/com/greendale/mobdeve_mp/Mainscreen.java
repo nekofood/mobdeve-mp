@@ -58,7 +58,7 @@ public class Mainscreen extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
 
-        SharedPrefTest.setText((sharedPreferences.getString("BSPECIES","A")));
+        SharedPrefTest.setText(Species);
         switch (Species) {
             case "Birthday Bear":
                 bytePet.setImageResource(R.drawable.birthdaybear);
