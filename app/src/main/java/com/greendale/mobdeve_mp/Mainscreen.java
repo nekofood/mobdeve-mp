@@ -25,6 +25,13 @@ public class Mainscreen extends AppCompatActivity {
     ImageView bowl, container,heartIndicator, bytePet;
     Boolean foodToggle,waterToggle,careToggle;
     TextView SharedPrefTest;
+
+    int needHunger, needThirst, needLove = 100; //fallback values
+
+    final int MAX_HUNGER = 100;
+    final int MAX_THIRST = 100;
+    final int MAX_LOVE = 100;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +71,13 @@ public class Mainscreen extends AppCompatActivity {
                 break;
         }
 
-        if ((sharedPreferences.getInt("BCHUNGER", 0) == 1) && (sharedPreferences.getInt("BCTHIRST ", 1)==0)){
+        //load current hunger/thirst/love values into ints
+        needHunger = sharedPreferences.getInt("BCHUNGER", 100);
+        needThirst = sharedPreferences.getInt("BCTHIRST", 100);
+        needLove = sharedPreferences.getInt("BCLOVE", 100);
+
+        //pet is gone if hunger and thirst is 0
+        if (needHunger == 0 && needThirst == 0){
             bytePet.setVisibility(View.INVISIBLE);
         }
         else bytePet.setVisibility(View.VISIBLE);
@@ -91,11 +104,11 @@ public class Mainscreen extends AppCompatActivity {
         startActivity(intent);
     }
     public void giveFood(View v){
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
         if (!foodToggle){
             foodToggle = true;
             graphicIndicator.setVisibility(View.VISIBLE);
-            if (sharedPreferences.getInt("BCHUNGER", 0) < sharedPreferences.getInt("BMHUNGER", 0)) //TODO: replace this with sharedpreference food variable
+            //only allow feeding if hunger < max
+            if (needHunger < MAX_HUNGER)
             {
                 bowl.setImageResource(R.drawable.foodbowlempty);
                 container.setImageResource(R.drawable.megabites);
@@ -115,11 +128,11 @@ public class Mainscreen extends AppCompatActivity {
         }
     }
     public void giveWater(View v){
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
         if (!waterToggle){
             waterToggle = true;
             graphicIndicator.setVisibility(View.VISIBLE);
-            if (sharedPreferences.getInt("BCTHIRST", 0) < sharedPreferences.getInt("BMTHIRST", 0)) //TODO: replace this with sharedpreference food variable
+            //only allow giving water if thirst < max
+            if (needThirst < MAX_THIRST)
             {
                 bowl.setImageResource(R.drawable.waterbowlempty);
                 container.setImageResource(R.drawable.waterpitcher);
@@ -139,11 +152,9 @@ public class Mainscreen extends AppCompatActivity {
         }
     }
     public void giveCare(View v){
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
-        Integer heart = sharedPreferences.getInt("BCLOVE", 0); //get BCLOVE
         ViewGroup.LayoutParams heartsize = heartIndicator.getLayoutParams();
-        heartsize.height = heart;
-        heartsize.width = heart;
+        heartsize.height = needLove;
+        heartsize.width = needLove;
         heartIndicator.setLayoutParams(heartsize);
         if (!careToggle){
             careToggle = true;
