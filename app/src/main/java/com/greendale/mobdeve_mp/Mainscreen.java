@@ -26,7 +26,7 @@ public class Mainscreen extends AppCompatActivity {
     Boolean foodToggle,waterToggle,careToggle;
     TextView SharedPrefTest;
 
-    int needHunger, needThirst, needLove = 100; //fallback values
+    int needHunger, needThirst, needLove = 100; //fallback value is 100
 
     final int MAX_HUNGER = 100;
     final int MAX_THIRST = 100;
@@ -72,9 +72,7 @@ public class Mainscreen extends AppCompatActivity {
         }
 
         //load current hunger/thirst/love values into ints
-        needHunger = sharedPreferences.getInt("BCHUNGER", 100);
-        needThirst = sharedPreferences.getInt("BCTHIRST", 100);
-        needLove = sharedPreferences.getInt("BCLOVE", 100);
+        loadData();
 
         //pet is gone if hunger and thirst is 0
         if (needHunger == 0 && needThirst == 0){
@@ -182,6 +180,17 @@ public class Mainscreen extends AppCompatActivity {
         editor.putInt("BCTHIRST", needThirst);
         editor.putInt("BCLOVE", needLove);
         editor.apply();
+    }
+
+    /**
+     * Load data from SharedPreferences. Honestly not sure where this is needed
+     */
+    public void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
+
+        needHunger = sharedPreferences.getInt("BCHUNGER", 100);
+        needThirst = sharedPreferences.getInt("BCTHURST", 100);
+        needLove = sharedPreferences.getInt("BCLOVE", 100);
     }
 
     @Override
