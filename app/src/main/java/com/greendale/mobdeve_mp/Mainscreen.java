@@ -30,6 +30,7 @@ public class Mainscreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
+
         slideMenu = (FrameLayout) findViewById(R.id.slideMenu);
         graphicIndicator = (ConstraintLayout) findViewById(R.id.graphicIndicator);
         fightButton = (ImageButton) findViewById(R.id.fightButton);
@@ -46,20 +47,29 @@ public class Mainscreen extends AppCompatActivity {
         foodToggle = false;
         waterToggle = false;
         careToggle = false;
+
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFS", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
+
         SharedPrefTest.setText((sharedPreferences.getString("BSPECIES","A")));
-        if (Species.equals("Birthday Bear")){
+        switch (Species) {
+            case "Birthday Bear":
                 bytePet.setImageResource(R.drawable.birthdaybear);
-        } else if (Species.equals("PenguRanger")) {
-            bytePet.setImageResource(R.drawable.penguranger);
+                break;
+            case "PenguRanger":
+                bytePet.setImageResource(R.drawable.penguranger);
+                break;
+            case "Salacommander":
+                bytePet.setImageResource(R.drawable.salacommander);
+                break;
         }
-        else bytePet.setImageResource(R.drawable.salacommander);
+
         if ((sharedPreferences.getInt("BCHUNGER", 0) == 1) && (sharedPreferences.getInt("BCTHIRST ", 1)==0)){
             bytePet.setVisibility(View.INVISIBLE);
         }
         else bytePet.setVisibility(View.VISIBLE);
-        }
+
+    }
     public void OpenSesame(View v)
     {
         slideMenu.setVisibility(View.VISIBLE);
