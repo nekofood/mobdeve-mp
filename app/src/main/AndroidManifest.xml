@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LilDigitals"
         tools:targetApi="31">
+
+        <service
+            android:name=".StatDecreaseService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity
             android:name=".Settings"
             android:exported="false" />
