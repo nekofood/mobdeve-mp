@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
 
 public class StatDecreaseService extends Service {
 
 	Handler bgHandler;
+	HandlerThread handlerThread;
 
 	int needHunger, needThirst, needLove = 100; //fallback value is 100
 
@@ -33,6 +35,14 @@ public class StatDecreaseService extends Service {
 		// Return START_STICKY if you want the service to restart automatically if it gets terminated
 
 		// Start a handler to decrease stats by fixed value * (item-based multiplier) every 5/10 minutes
+		handlerThread = new HandlerThread("bgHandler");
+		handlerThread.setDaemon(true);
+		handlerThread.start();
+		bgHandler = new Handler(handlerThread.getLooper());
+
+		// Looper will send a message regularly every <interval> ms
+		bgHandler.postDelayed(() -> update(), INTERVAL);
+
 		return START_STICKY;
 	}
 
