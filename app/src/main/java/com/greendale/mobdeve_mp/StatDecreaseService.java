@@ -1,5 +1,6 @@
 package com.greendale.mobdeve_mp;
 
+import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +13,7 @@ public class StatDecreaseService extends Service {
 
 	Handler bgHandler;
 	HandlerThread handlerThread;
-
+	Context context = this;
 	int needHunger, needThirst, needLove = 100; //fallback value is 100
 
 	final int MAX_HUNGER = 100;
@@ -20,9 +21,12 @@ public class StatDecreaseService extends Service {
 	final int MAX_LOVE = 100;
 
 	boolean hasFoodBoost, hasWaterBoost, hasLoveBoost = false;
+	boolean notificationOn = false;
 
 	final int REDUCE_RATE = 5; //base stat reduction rate
 	final int INTERVAL = 10; //how often in seconds the thread will work; default 5 mins (300), for debugging you can use smaller values
+	final int NOTIF_THRESHOLD = 15; //how low a stat has to drop before a notification will be sent
+	final String NOTIF_CHANNEL = "APP_NOTIFS"; //notification channel
 
 	@Override
 	public void onCreate() {
@@ -71,8 +75,9 @@ public class StatDecreaseService extends Service {
 		needThirst = sharedPreferences.getInt("BCTHURST", 100);
 		needLove = sharedPreferences.getInt("BCLOVE", 100);
 		hasFoodBoost = sharedPreferences.getBoolean("HAS_FOODBOOST", false);
-		hasWaterBoost= sharedPreferences.getBoolean("HAS_WATERBOOST", false);
-		hasLoveBoost= sharedPreferences.getBoolean("HAS_LOVEBOOST", false);
+		hasWaterBoost = sharedPreferences.getBoolean("HAS_WATERBOOST", false);
+		hasLoveBoost = sharedPreferences.getBoolean("HAS_LOVEBOOST", false);
+		notificationOn = sharedPreferences.getBoolean("NOTIF_ON", false);
 	}
 	public void saveData() {
 		SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
@@ -95,6 +100,34 @@ public class StatDecreaseService extends Service {
 		needThirst = Math.max(0, needHunger - (hasWaterBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
 		needLove = Math.max(0, needHunger - (hasLoveBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
 
+		if (notificationOn) {
+			String notifString = "";
+			for (int i = 0; i < 3; i++) {
+				//Extremely messed up way to maintain DRY
+				switch (i) {
+					case 0:
+						if (needHunger < 25) {
+							notifString = "Your byte is hungry!";
+						}
+						break;
+					case 1:
+						if (needThirst < 25) {
+							notifString = "Your byte is thirsty!";
+						}
+						break;
+					case 2:
+						if (needLove < 25) {
+							notifString = "Your byte needs attention!";
+						}
+				}
+				Notification notif = new Notification.Builder(context, NOTIF_CHANNEL)
+						.setSmallIcon(/* TODO */)
+						.setContentTitle("Come check on your byte!")
+						.setContentText(notifString)
+						.setWhen(System.currentTimeMillis())
+						.build();
+			}
+		}
 		saveData();
 	}
 }
