@@ -102,6 +102,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/birthdaybear" />
 
+    <TextView
+        android:id="@+id/debugTextViewHunger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/foodButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/heartIndicator"
         android:layout_width="100dp"

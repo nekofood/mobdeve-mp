@@ -20,7 +20,7 @@ public class StatDecreaseService extends Service {
 	final int MAX_LOVE = 100;
 
 	final int REDUCE_RATE = 5; //base stat reduction rate
-	final int INTERVAL = 300000; //how often in ms the thread will work; default 5 mins
+	final int INTERVAL = 10000; //how often in ms the thread will work; default 5 mins (300000), for debugging you can use smaller values
 
 	@Override
 	public void onCreate() {
@@ -40,7 +40,7 @@ public class StatDecreaseService extends Service {
 		handlerThread.start();
 		bgHandler = new Handler(handlerThread.getLooper());
 
-		// Looper will send a message regularly every <interval> ms
+		// Looper will run this regularly every <interval> ms
 		bgHandler.postDelayed(() -> update(), INTERVAL);
 
 		return START_STICKY;

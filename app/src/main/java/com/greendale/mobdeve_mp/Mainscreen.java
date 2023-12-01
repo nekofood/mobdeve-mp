@@ -32,6 +32,8 @@ public class Mainscreen extends AppCompatActivity {
     final int MAX_THIRST = 100;
     final int MAX_LOVE = 100;
 
+    TextView hungerText; //DEBUG
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,9 @@ public class Mainscreen extends AppCompatActivity {
         foodToggle = false;
         waterToggle = false;
         careToggle = false;
+
+        //debugging textview
+        hungerText = (TextView) findViewById(R.id.debugTextViewHunger);
 
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
@@ -83,6 +88,12 @@ public class Mainscreen extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         petGoneCheck();
+        debugTextViewRefresh();
+    }
+
+    public void debugTextViewRefresh() {
+        loadData();
+        hungerText.setText("" + needHunger);
     }
 
     public void OpenSesame(View v) { slideMenu.setVisibility(View.VISIBLE); }
