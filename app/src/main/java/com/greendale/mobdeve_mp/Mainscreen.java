@@ -38,6 +38,8 @@ public class Mainscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
 
+        startService(new Intent(this, StatDecreaseService.class));
+
         slideMenu = (FrameLayout) findViewById(R.id.slideMenu);
         graphicIndicator = (ConstraintLayout) findViewById(R.id.graphicIndicator);
         fightButton = (ImageButton) findViewById(R.id.fightButton);
@@ -73,21 +75,25 @@ public class Mainscreen extends AppCompatActivity {
 
         //load current hunger/thirst/love values into ints
         loadData();
+        //check if pet should be gone
+        petGoneCheck();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        petGoneCheck();
+    }
+
+    public void OpenSesame(View v) { slideMenu.setVisibility(View.VISIBLE); }
+    public void CloseSesame(View v) { slideMenu.setVisibility(View.GONE); }
+
+    public void petGoneCheck() {
         //pet is gone if hunger and thirst is 0
         if (needHunger == 0 && needThirst == 0){
             bytePet.setVisibility(View.INVISIBLE);
         }
         else bytePet.setVisibility(View.VISIBLE);
-
-    }
-    public void OpenSesame(View v)
-    {
-        slideMenu.setVisibility(View.VISIBLE);
-    }
-    public void CloseSesame(View v)
-    {
-       slideMenu.setVisibility(View.GONE);
     }
     public void Battle(View v){
         Intent intent = new Intent(Mainscreen.this, Battle.class);
