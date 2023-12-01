@@ -19,6 +19,8 @@ public class StatDecreaseService extends Service {
 	final int MAX_THIRST = 100;
 	final int MAX_LOVE = 100;
 
+	boolean hasFoodBoost, hasWaterBoost, hasLoveBoost = false;
+
 	final int REDUCE_RATE = 5; //base stat reduction rate
 	final int INTERVAL = 10; //how often in seconds the thread will work; default 5 mins (300), for debugging you can use smaller values
 
@@ -68,6 +70,9 @@ public class StatDecreaseService extends Service {
 		needHunger = sharedPreferences.getInt("BCHUNGER", 100);
 		needThirst = sharedPreferences.getInt("BCTHURST", 100);
 		needLove = sharedPreferences.getInt("BCLOVE", 100);
+		hasFoodBoost = sharedPreferences.getBoolean("HAS_FOODBOOST", false);
+		hasWaterBoost= sharedPreferences.getBoolean("HAS_WATERBOOST", false);
+		hasLoveBoost= sharedPreferences.getBoolean("HAS_LOVEBOOST", false);
 	}
 	public void saveData() {
 		SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
@@ -83,10 +88,12 @@ public class StatDecreaseService extends Service {
 	public void update() {
 		loadData();
 
-		//todo: Check if player has boost items
-		needHunger = Math.max(0, needHunger - REDUCE_RATE);
-		needThirst = Math.max(0, needHunger - REDUCE_RATE);
-		needLove = Math.max(0, needHunger - REDUCE_RATE);
+		//If player has relevant boost item, halve the amount of stat reduced every interval
+		//(we achieve this using a ternary operation)
+		//Also prevent stats from going negative using a max()
+		needHunger = Math.max(0, needHunger - (hasFoodBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
+		needThirst = Math.max(0, needHunger - (hasWaterBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
+		needLove = Math.max(0, needHunger - (hasLoveBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
 
 		saveData();
 	}
