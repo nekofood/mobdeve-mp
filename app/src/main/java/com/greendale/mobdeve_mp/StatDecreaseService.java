@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 
+import androidx.core.app.NotificationCompat;
+
 public class StatDecreaseService extends Service {
 
 	Handler bgHandler;
@@ -77,7 +79,7 @@ public class StatDecreaseService extends Service {
 		hasFoodBoost = sharedPreferences.getBoolean("HAS_FOODBOOST", false);
 		hasWaterBoost = sharedPreferences.getBoolean("HAS_WATERBOOST", false);
 		hasLoveBoost = sharedPreferences.getBoolean("HAS_LOVEBOOST", false);
-		notificationOn = sharedPreferences.getBoolean("NOTIF_ON", false);
+		notificationOn = sharedPreferences.getBoolean("NOTIF_ON", true);
 	}
 	public void saveData() {
 		SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
@@ -100,32 +102,29 @@ public class StatDecreaseService extends Service {
 		needThirst = Math.max(0, needHunger - (hasWaterBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
 		needLove = Math.max(0, needHunger - (hasLoveBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
 
+		//TODO setup this shit
 		if (notificationOn) {
-			String notifString = "";
-			for (int i = 0; i < 3; i++) {
-				//Extremely messed up way to maintain DRY
-				switch (i) {
-					case 0:
-						if (needHunger < 25) {
-							notifString = "Your byte is hungry!";
-						}
-						break;
-					case 1:
-						if (needThirst < 25) {
-							notifString = "Your byte is thirsty!";
-						}
-						break;
-					case 2:
-						if (needLove < 25) {
-							notifString = "Your byte needs attention!";
-						}
-				}
-				Notification notif = new Notification.Builder(context, NOTIF_CHANNEL)
-						.setSmallIcon(R.drawable.bdayicon)
-						.setContentTitle("Come check on your byte!")
-						.setContentText(notifString)
-						.setWhen(System.currentTimeMillis())
-						.build();
+			Notification notifHunger = new NotificationCompat.Builder(context, NOTIF_CHANNEL)
+					.setSmallIcon(R.drawable.bdayicon)
+					.setContentTitle("Come check on your byte!")
+					.setContentText("Your byte is hungry!")
+					.setWhen(System.currentTimeMillis())
+					.build();
+			Notification notifThirst = new Notification.Builder(context, NOTIF_CHANNEL)
+					.setSmallIcon(R.drawable.bdayicon)
+					.setContentTitle("Come check on your byte!")
+					.setContentText("Your byte is thirsty!")
+					.setWhen(System.currentTimeMillis())
+					.build();
+			Notification notifLove = new Notification.Builder(context, NOTIF_CHANNEL)
+					.setSmallIcon(R.drawable.bdayicon)
+					.setContentTitle("Come check on your byte!")
+					.setContentText("Your byte is lonely!")
+					.setWhen(System.currentTimeMillis())
+					.build();
+
+			if (needHunger < 25) {
+
 			}
 		}
 		saveData();
