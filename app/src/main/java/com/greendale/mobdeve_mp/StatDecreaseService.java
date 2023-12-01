@@ -121,7 +121,7 @@ public class StatDecreaseService extends Service {
 						}
 				}
 				Notification notif = new Notification.Builder(context, NOTIF_CHANNEL)
-						.setSmallIcon(/* TODO */)
+						.setSmallIcon(R.drawable.bdayicon)
 						.setContentTitle("Come check on your byte!")
 						.setContentText(notifString)
 						.setWhen(System.currentTimeMillis())
