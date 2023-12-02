@@ -158,17 +158,17 @@ public class StatDecreaseService extends Service {
 				if (!thirstNotifSent) {
 					notifManager.notify(2, notifThirst.build());
 					thirstNotifSent = true;
-				} else {
-					thirstNotifSent = false;
 				}
+			} else {
+				thirstNotifSent = false;
 			}
 			if (needLove < NOTIF_THRESHOLD) {
 				if (!loveNotifSent) {
 					notifManager.notify(3, notifLove.build());
 					loveNotifSent = true;
-				} else {
-					loveNotifSent = false;
 				}
+			} else {
+				loveNotifSent = false;
 			}
 		}
 		saveData();
