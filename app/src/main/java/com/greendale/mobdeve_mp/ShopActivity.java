@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -65,8 +66,11 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     public void purchaseItem (String itemTag) {
+        Log.i("shop", "received purchase confirmation from fragment");
+        Log.i("shop", itemTag);
+
         //check for validity
-        if (itemTag != "itemFood" || itemTag != "itemWater" || itemTag != "itemLove") {
+        if (itemTag == null || (!itemTag.equals("itemFood") && !itemTag.equals("itemWater") && !itemTag.equals("itemLove"))) {
             return;
         }
 
