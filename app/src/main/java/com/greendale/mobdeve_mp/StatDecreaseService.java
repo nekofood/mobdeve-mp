@@ -28,6 +28,8 @@ public class StatDecreaseService extends Service {
 	final int MAX_LOVE = 100;
 
 	boolean hasFoodBoost, hasWaterBoost, hasLoveBoost = false;
+	//Flags to prevent repeated sending of notifications
+	boolean hungerNotifSent, thirstNotifSent, loveNotifSent = false;
 	boolean notificationOn = false;
 
 	final int REDUCE_RATE = 5; //base stat reduction rate
@@ -145,13 +147,28 @@ public class StatDecreaseService extends Service {
 					.setWhen(System.currentTimeMillis());
 
 			if (needHunger < NOTIF_THRESHOLD) {
-				notifManager.notify(1, notifHunger.build());
+				if (!hungerNotifSent) {
+					notifManager.notify(1, notifHunger.build());
+					hungerNotifSent = true;
+				}
+			} else {
+				hungerNotifSent = false;
 			}
 			if (needThirst < NOTIF_THRESHOLD) {
-				notifManager.notify(2, notifThirst.build());
+				if (!thirstNotifSent) {
+					notifManager.notify(2, notifThirst.build());
+					thirstNotifSent = true;
+				} else {
+					thirstNotifSent = false;
+				}
 			}
 			if (needLove < NOTIF_THRESHOLD) {
-				notifManager.notify(3, notifLove.build());
+				if (!loveNotifSent) {
+					notifManager.notify(3, notifLove.build());
+					loveNotifSent = true;
+				} else {
+					loveNotifSent = false;
+				}
 			}
 		}
 		saveData();
