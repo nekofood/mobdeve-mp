@@ -10,12 +10,13 @@ import androidx.fragment.app.DialogFragment;
 public class ShopFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        String tag = getArguments().getString("ITEMTAG");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Purchase this item?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        ((ShopActivity)getActivity()).purchaseItem(tag);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

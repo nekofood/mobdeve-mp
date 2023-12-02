@@ -102,7 +102,8 @@
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
                 android:contentDescription="Shop button"
-                app:srcCompat="@drawable/shop_button" />
+                app:srcCompat="@drawable/shop_button"
+                android:tag="itemFood" />
 
             <TextView
                 android:id="@+id/shopText1"
@@ -113,7 +114,7 @@
                 android:contextClickable="false"
                 android:linksClickable="false"
                 android:longClickable="false"
-                android:text="TextView"
+                android:text="Special Food - 250 Coins"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#000"
                 android:textSize="18sp"
@@ -132,7 +133,8 @@
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
                 android:contentDescription="Shop button"
-                app:srcCompat="@drawable/shop_button" />
+                app:srcCompat="@drawable/shop_button"
+                android:tag="itemWater" />
 
             <TextView
                 android:id="@+id/shopText2"
@@ -143,7 +145,7 @@
                 android:contextClickable="false"
                 android:linksClickable="false"
                 android:longClickable="false"
-                android:text="TextView"
+                android:text="Special Water - 250 Coins"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#000"
                 android:textSize="18sp"
@@ -161,7 +163,8 @@
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
                 android:contentDescription="Shop button"
-                app:srcCompat="@drawable/shop_button" />
+                app:srcCompat="@drawable/shop_button"
+                android:tag="itemLove"/>
 
             <TextView
                 android:id="@+id/shopText3"
@@ -172,12 +175,23 @@
                 android:contextClickable="false"
                 android:linksClickable="false"
                 android:longClickable="false"
-                android:text="TextView"
+                android:text="Ball - 250 Coins"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/coinCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="#F0EAE8E8"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
