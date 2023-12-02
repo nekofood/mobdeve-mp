@@ -112,7 +112,6 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     private void updateCoinsText() {
-        loadData();
         coinText.setText("You have " + coins + " coins");
     }
 
@@ -140,7 +139,7 @@ public class ShopActivity extends AppCompatActivity {
 
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
-        coins = sharedPreferences.getInt("COINS", 1000);
+        coins = sharedPreferences.getInt("COINS", 0);
         hasFoodBoost = sharedPreferences.getBoolean("HAS_FOODBOOST", false);
         hasWaterBoost = sharedPreferences.getBoolean("HAS_WATERBOOST", false);
         hasLoveBoost = sharedPreferences.getBoolean("HAS_LOVEBOOST", false);
