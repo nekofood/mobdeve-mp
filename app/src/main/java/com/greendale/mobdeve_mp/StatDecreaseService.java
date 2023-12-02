@@ -1,21 +1,26 @@
 package com.greendale.mobdeve_mp;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 public class StatDecreaseService extends Service {
 
 	Handler bgHandler;
 	HandlerThread handlerThread;
 	Context context = this;
+	NotificationManager notifManager;
 	int needHunger, needThirst, needLove = 100; //fallback value is 100
 
 	final int MAX_HUNGER = 100;
@@ -41,6 +46,9 @@ public class StatDecreaseService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// Code to be executed when the service is started
 		// Return START_STICKY if you want the service to restart automatically if it gets terminated
+
+		//Create the notification channel
+		createNotificationChannel();
 
 		// Start a handler to decrease stats by fixed value * (item-based multiplier) every 5/10 minutes
 		handlerThread = new HandlerThread("bgHandler");
@@ -79,7 +87,7 @@ public class StatDecreaseService extends Service {
 		hasFoodBoost = sharedPreferences.getBoolean("HAS_FOODBOOST", false);
 		hasWaterBoost = sharedPreferences.getBoolean("HAS_WATERBOOST", false);
 		hasLoveBoost = sharedPreferences.getBoolean("HAS_LOVEBOOST", false);
-		notificationOn = sharedPreferences.getBoolean("NOTIF_ON", true);
+		notificationOn = sharedPreferences.getBoolean("NOTIF_ON", true); //TODO: this should be false but it's true for testing purpoises
 	}
 	public void saveData() {
 		SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
@@ -91,6 +99,22 @@ public class StatDecreaseService extends Service {
 		editor.apply();
 	}
 
+	//Create notifica
+	private void createNotificationChannel() {
+		// Create the NotificationChannel, but only on API 26+ because
+		// the NotificationChannel class is not in the Support Library.
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			CharSequence name = "Lil Digitals Notifications";
+			String description = "Notifications for pet needs";
+			int importance = NotificationManager.IMPORTANCE_DEFAULT;
+			NotificationChannel channel = new NotificationChannel(NOTIF_CHANNEL, name, importance);
+			channel.setDescription(description);
+			// Register the channel with the system; you can't change the importance
+			// or other notification behaviors after this.
+			notifManager = getSystemService(NotificationManager.class);
+			notifManager.createNotificationChannel(channel);
+		}
+	}
 	//Function to be ran every interval
 	public void update() {
 		loadData();
@@ -102,29 +126,32 @@ public class StatDecreaseService extends Service {
 		needThirst = Math.max(0, needHunger - (hasWaterBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
 		needLove = Math.max(0, needHunger - (hasLoveBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
 
-		//TODO setup this shit
 		if (notificationOn) {
-			Notification notifHunger = new NotificationCompat.Builder(context, NOTIF_CHANNEL)
+			//Set up notification builders
+			Notification.Builder notifHunger = new Notification.Builder(context, NOTIF_CHANNEL)
 					.setSmallIcon(R.drawable.bdayicon)
 					.setContentTitle("Come check on your byte!")
 					.setContentText("Your byte is hungry!")
-					.setWhen(System.currentTimeMillis())
-					.build();
-			Notification notifThirst = new Notification.Builder(context, NOTIF_CHANNEL)
+					.setWhen(System.currentTimeMillis());
+			Notification.Builder notifThirst = new Notification.Builder(context, NOTIF_CHANNEL)
 					.setSmallIcon(R.drawable.bdayicon)
 					.setContentTitle("Come check on your byte!")
 					.setContentText("Your byte is thirsty!")
-					.setWhen(System.currentTimeMillis())
-					.build();
-			Notification notifLove = new Notification.Builder(context, NOTIF_CHANNEL)
+					.setWhen(System.currentTimeMillis());
+			Notification.Builder notifLove = new Notification.Builder(context, NOTIF_CHANNEL)
 					.setSmallIcon(R.drawable.bdayicon)
 					.setContentTitle("Come check on your byte!")
 					.setContentText("Your byte is lonely!")
-					.setWhen(System.currentTimeMillis())
-					.build();
+					.setWhen(System.currentTimeMillis());
 
-			if (needHunger < 25) {
-
+			if (needHunger < NOTIF_THRESHOLD) {
+				notifManager.notify(1, notifHunger.build());
+			}
+			if (needThirst < NOTIF_THRESHOLD) {
+				notifManager.notify(2, notifThirst.build());
+			}
+			if (needLove < NOTIF_THRESHOLD) {
+				notifManager.notify(3, notifLove.build());
 			}
 		}
 		saveData();
