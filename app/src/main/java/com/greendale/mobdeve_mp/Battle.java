@@ -71,15 +71,15 @@ public class Battle extends AppCompatActivity {
         if (hasLoveBoost) byteAttack *= 1.1;
         switch (Species) {
             case "Birthday Bear":
-                bytecharacter.setImageResource(R.drawable.birthdaybear);
+                bytecharacter.setImageResource(R.drawable.birthdaybearback);
                 BEDIcon.setImageResource(R.drawable.birthdaybear);
                 break;
             case "PenguRanger":
-                bytecharacter.setImageResource(R.drawable.penguranger);
+                bytecharacter.setImageResource(R.drawable.pengurangerback);
                 BEDIcon.setImageResource(R.drawable.penguranger);
                 break;
             case "Salacommander":
-                bytecharacter.setImageResource(R.drawable.salacommander);
+                bytecharacter.setImageResource(R.drawable.salacommanderback); //salacommander never faces his opponent, they are doomed
                 BEDIcon.setImageResource(R.drawable.salacommander);
                 break;
         }
