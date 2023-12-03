@@ -132,11 +132,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainscreenBg" />
 
+    <ImageButton
+        android:id="@+id/advancebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:contentDescription="advance button"
+        android:onClick="Advance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mainscreenBg"
+        app:srcCompat="@drawable/edb" />
+
+    <TextView
+        android:id="@+id/advtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/passion_one"
+        android:text="Advance"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/advancebutton"
+        app:layout_constraintEnd_toEndOf="@+id/advancebutton"
+        app:layout_constraintStart_toStartOf="@+id/advancebutton"
+        app:layout_constraintTop_toTopOf="@+id/advancebutton" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/graphicIndicator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
+        tools:layout_editor_absoluteX="-52dp"
+        tools:layout_editor_absoluteY="70dp"
         tools:visibility="visible">
 
         <ImageView

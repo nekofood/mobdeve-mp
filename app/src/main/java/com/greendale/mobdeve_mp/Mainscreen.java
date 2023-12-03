@@ -11,6 +11,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -25,8 +26,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 public class Mainscreen extends AppCompatActivity {
     FrameLayout slideMenu;
     ConstraintLayout graphicIndicator;
-    ImageButton fightButton, foodButton, waterButton, careButton;
+    ImageButton fightButton, foodButton, waterButton, careButton, advButton;
     ImageView bowl, container,heartIndicator, bytePet;
+
+    TextView advText;
     Boolean foodToggle,waterToggle,careToggle;
     TextView SharedPrefTest;
 
@@ -102,6 +105,8 @@ public class Mainscreen extends AppCompatActivity {
         container = (ImageView) findViewById(R.id.container);
         heartIndicator = (ImageView) findViewById(R.id.heartIndicator);
         SharedPrefTest = (TextView) findViewById(R.id.SharedPrefTest);
+        advButton = (ImageButton) findViewById(R.id.advancebutton);
+        advText = (TextView) findViewById(R.id.advtext);
         slideMenu.setVisibility(View.GONE);
         graphicIndicator.setVisibility(View.GONE);
         foodToggle = false;
@@ -120,17 +125,30 @@ public class Mainscreen extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
+        Boolean evo = sharedPreferences.getBoolean("CANEVO", false);
+        Integer wins = sharedPreferences.getInt("WINS", 0);
+        if (!evo && wins >=10){
+            advButton.setVisibility(View.VISIBLE);
+            advText.setVisibility(View.VISIBLE);
+        }
+        else{
+            advButton.setVisibility(View.GONE);
+            advText.setVisibility(View.GONE);
+        }
 
         SharedPrefTest.setText(Species);
         switch (Species) {
             case "Birthday Bear":
-                bytePet.setImageResource(R.drawable.birthdaybear);
+                if (evo) bytePet.setImageResource(R.drawable.birthdaybearevo);
+                else bytePet.setImageResource(R.drawable.birthdaybear);
                 break;
             case "PenguRanger":
-                bytePet.setImageResource(R.drawable.penguranger);
+                if (evo) bytePet.setImageResource(R.drawable.pengurangerevo);
+                else bytePet.setImageResource(R.drawable.penguranger);
                 break;
             case "Salacommander":
-                bytePet.setImageResource(R.drawable.salacommander);
+                if (evo) bytePet.setImageResource(R.drawable.salacommanderevo);
+                else bytePet.setImageResource(R.drawable.salacommander);
                 break;
         }
 
@@ -164,6 +182,19 @@ public class Mainscreen extends AppCompatActivity {
     public void GoToSettings(View v){
         Intent intent = new Intent(Mainscreen.this, Settings.class);
         startActivity(intent);
+    }
+    public void Advance(View v) {
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
+        Boolean evo = sharedPreferences.getBoolean("CANEVO", false);
+        Integer wins = sharedPreferences.getInt("WINS", 0);
+        if (!evo && wins >=10){
+            sharedPreferences.edit().putBoolean("CANEVO", true).apply();
+            advButton.setVisibility(View.GONE);
+            advText.setVisibility(View.GONE);
+            Intent intent = new Intent(this, Mainscreen.class);
+            startActivity(intent);
+            finish();
+        }
     }
     public void giveFood(View v){
         if (!foodToggle){
@@ -273,7 +304,6 @@ public class Mainscreen extends AppCompatActivity {
      */
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
-
         needHunger = sharedPreferences.getInt("BCHUNGER", 100);
         needThirst = sharedPreferences.getInt("BCTHURST", 100);
         needLove = sharedPreferences.getInt("BCLOVE", 100);

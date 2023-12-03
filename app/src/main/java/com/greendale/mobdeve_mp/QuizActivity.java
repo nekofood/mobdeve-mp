@@ -120,9 +120,11 @@ public class QuizActivity extends AppCompatActivity {
             editor.putBoolean("ISQUIZDONE",true);
             //Set up the other important stats
             editor.putBoolean("ISNOTIFSON", true);
+            editor.putBoolean("CANEVO",false);
             editor.putInt("BCHUNGER", 100);
             editor.putInt("BCTHIRST", 100);
             editor.putInt("BCLOVE", 100);
+            editor.putInt("WINS", 0);
             editor.apply();
 
             Intent i = new Intent(QuizActivity.this, Mainscreen.class);

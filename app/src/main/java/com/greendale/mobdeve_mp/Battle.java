@@ -19,7 +19,7 @@ public class Battle extends AppCompatActivity {
     FrameLayout battlePopup;
     ImageButton exitMatchButton,resumeMatchButton,pauseButton,ExtendDrive;
     ImageView bytecharacter,enemybyte,BEDIcon;
-    TextView sharedpreftesttwo, battleplayerhp, enemyhptext;
+    TextView sharedpreftesttwo, battleplayerhp, enemyhptext, wintest;
     Boolean canFight = true;
     int enemyHP = (int)(Math.random() * (1000-800+1)+800);
     int enemymaxHP = enemyHP;
@@ -47,16 +47,21 @@ public class Battle extends AppCompatActivity {
         playerBar = (ProgressBar) findViewById(R.id.playerHP);
         battleplayerhp = (TextView) findViewById(R.id.battlePlayerHp);
         enemyhptext = (TextView) findViewById(R.id.enemyHptext);
+        wintest = (TextView) findViewById(R.id.wintest);
         //sharedprefs
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
+        int wins = sharedPreferences.getInt("WINS",  5);
+        wintest.setText(wins+"");
         Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
+        Boolean evo = sharedPreferences.getBoolean("CANEVO", false);
         boolean hasFoodBoost = sharedPreferences.getBoolean("HAS_FOODBOOST", false);
         boolean hasWaterBoost = sharedPreferences.getBoolean("HAS_WATERBOOST", false);
         boolean hasLoveBoost = sharedPreferences.getBoolean("HAS_LOVEBOOST", false);
         byteHP = (sharedPreferences.getInt("BCHUNGER", 100));
+        if (byteHP == 0) byteHP = 1; //anti divide by 0
         int chance = sharedPreferences.getInt("BCTHURST", 100);
         if (chance >= 80) byteEvasion = 20;
-        byteAttack = sharedPreferences.getInt("BCLOVE", 100)/10;
+        byteAttack = sharedPreferences.getInt("BCLOVE", 100)/4;
         byteSetEvasion = byteEvasion;
         //hide pausemenu
         battlePopup.setVisibility(View.GONE);
@@ -69,18 +74,38 @@ public class Battle extends AppCompatActivity {
         if (hasFoodBoost) byteHP *= 1.1;
         if (hasWaterBoost) byteEvasion += 10;
         if (hasLoveBoost) byteAttack *= 1.1;
+        if (evo){
+            byteHP *= 1.1;
+            byteEvasion += 10;
+            byteAttack *= 1.1;
+        }
         switch (Species) {
             case "Birthday Bear":
+                if (evo){
+                    bytecharacter.setImageResource(R.drawable.birthdaybearevoback);
+                    BEDIcon.setImageResource(R.drawable.birthdaybearevo);
+                }
+                else{
                 bytecharacter.setImageResource(R.drawable.birthdaybearback);
-                BEDIcon.setImageResource(R.drawable.birthdaybear);
+                BEDIcon.setImageResource(R.drawable.birthdaybear);}
                 break;
             case "PenguRanger":
+                if (evo){
+                    bytecharacter.setImageResource(R.drawable.pengurangerevoback);
+                    BEDIcon.setImageResource(R.drawable.pengurangerevo);
+                }
+                else{
                 bytecharacter.setImageResource(R.drawable.pengurangerback);
-                BEDIcon.setImageResource(R.drawable.penguranger);
+                BEDIcon.setImageResource(R.drawable.penguranger);}
                 break;
             case "Salacommander":
+                if(evo){
+                    bytecharacter.setImageResource(R.drawable.salacommanderevoback); //salacommander never faces his opponent, they are doomed
+                    BEDIcon.setImageResource(R.drawable.salacommanderevo);
+                }
+                else{
                 bytecharacter.setImageResource(R.drawable.salacommanderback); //salacommander never faces his opponent, they are doomed
-                BEDIcon.setImageResource(R.drawable.salacommander);
+                BEDIcon.setImageResource(R.drawable.salacommander);}
                 break;
         }
         GenerateRandomEnemy();
@@ -118,7 +143,7 @@ public class Battle extends AppCompatActivity {
                 int current = sharedPreferences.getInt("COINS",  100);
                 int wins = sharedPreferences.getInt("WINS",  5);
                 sharedPreferences.edit().putInt("COINS", increase+current).apply();
-                sharedPreferences.edit().putInt("WINS", wins+1);
+                sharedPreferences.edit().putInt("WINS", wins+1).apply();
                 finish();
             }
             if (ExtendMeter < 25) {
