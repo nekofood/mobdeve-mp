@@ -49,6 +49,7 @@
         android:layout_marginBottom="35dp"
         android:background="#00FFFFFF"
         android:contentDescription="ExtendDrive"
+        android:onClick="ExtendDrive"
         android:scaleType="fitCenter"
         android:src="@drawable/edb"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -136,17 +137,15 @@
         app:layout_constraintTop_toTopOf="@+id/playerHP" />
 
     <TextView
-        android:id="@+id/battleEnemyName"
+        android:id="@+id/enemyHptext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/passion_one"
-        android:text="EnemyName"
+        android:text="100/100"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/enemyHP"
         app:layout_constraintEnd_toEndOf="@+id/enemyHP"
         app:layout_constraintStart_toStartOf="@+id/enemyHP" />
@@ -166,14 +165,14 @@
         android:id="@+id/battlePopup"
         android:layout_width="350dp"
         android:layout_height="350dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        tools:visibility="visible">
+        tools:visibility="invisible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -264,5 +263,15 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/sharedpreftesttwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="138dp"
+        android:text="TEST"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/battleBg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
