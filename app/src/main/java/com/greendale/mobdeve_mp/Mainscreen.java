@@ -32,11 +32,15 @@ public class Mainscreen extends AppCompatActivity {
     final int MAX_THIRST = 100;
     final int MAX_LOVE = 100;
 
+    TextView hungerText; //DEBUG
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainscreen);
+
+        startService(new Intent(this, StatDecreaseService.class));
 
         slideMenu = (FrameLayout) findViewById(R.id.slideMenu);
         graphicIndicator = (ConstraintLayout) findViewById(R.id.graphicIndicator);
@@ -54,6 +58,9 @@ public class Mainscreen extends AppCompatActivity {
         foodToggle = false;
         waterToggle = false;
         careToggle = false;
+
+        //debugging textview
+        hungerText = (TextView) findViewById(R.id.debugTextViewHunger);
 
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
@@ -73,22 +80,23 @@ public class Mainscreen extends AppCompatActivity {
 
         //load current hunger/thirst/love values into ints
         loadData();
+        //check if pet should be gone
+    }
 
-        //pet is gone if hunger and thirst is 0
-        if (needHunger == 0 && needThirst == 0){
-            bytePet.setVisibility(View.INVISIBLE);
-        }
-        else bytePet.setVisibility(View.VISIBLE);
+    @Override
+    public void onResume() {
+        super.onResume();
+        debugTextViewRefresh();
+    }
 
+    public void debugTextViewRefresh() {
+        loadData();
+        hungerText.setText("" + needHunger);
     }
-    public void OpenSesame(View v)
-    {
-        slideMenu.setVisibility(View.VISIBLE);
-    }
-    public void CloseSesame(View v)
-    {
-       slideMenu.setVisibility(View.GONE);
-    }
+
+    public void OpenSesame(View v) { slideMenu.setVisibility(View.VISIBLE); }
+    public void CloseSesame(View v) { slideMenu.setVisibility(View.GONE); }
+
     public void Battle(View v){
         Intent intent = new Intent(Mainscreen.this, Battle.class);
         startActivity(intent);
