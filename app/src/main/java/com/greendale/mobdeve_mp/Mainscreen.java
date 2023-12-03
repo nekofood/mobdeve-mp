@@ -280,13 +280,10 @@ public class Mainscreen extends AppCompatActivity {
     }
 
     //
-    public void detectShake(SensorEvent event) {
-
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        sensorManager.unregisterListener(shakeListener);
         saveData();
     }
     @Override
@@ -299,6 +296,7 @@ public class Mainscreen extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        sensorManager.unregisterListener(shakeListener);
         saveData();
     }
 }
