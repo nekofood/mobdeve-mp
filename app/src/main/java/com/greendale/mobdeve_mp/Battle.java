@@ -24,7 +24,7 @@ public class Battle extends AppCompatActivity {
     int enemyHP = (int)(Math.random() * (1000-800+1)+800);
     int enemymaxHP = enemyHP;
     int enemyAttack = (int)(Math.random() * 3 + 1);
-    int byteAttack, byteEvasion, byteHP, byteMaxHP;
+    int byteAttack, byteEvasion, byteHP, byteMaxHP, byteSetEvasion, shieldcountdown;
     int enemyspecies = (int)(Math.random() * 3 + 1);
     ProgressBar enemyBar, playerBar;
     int ExtendMeter = 0;
@@ -57,6 +57,7 @@ public class Battle extends AppCompatActivity {
         int chance = sharedPreferences.getInt("BCTHURST", 100);
         if (chance >= 80) byteEvasion = 20;
         byteAttack = sharedPreferences.getInt("BCLOVE", 100)/10;
+        byteSetEvasion = byteEvasion;
         //hide pausemenu
         battlePopup.setVisibility(View.GONE);
         //ExtendDrive Initialization
@@ -103,6 +104,13 @@ public class Battle extends AppCompatActivity {
             enemyHP -= byteAttack;
             enemyBar.setProgress(enemyHP/100);
             enemyhptext.setText(enemyHP+"/"+enemymaxHP);
+            if (shieldcountdown >0) {
+                shieldcountdown--;
+                if (shieldcountdown==0){
+                    byteEvasion = byteSetEvasion;
+                    bytecharacter.setImageAlpha(255);
+                }
+            }
             if (enemyHP <= 0) {
                 SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
                 canFight=false;
@@ -119,9 +127,10 @@ public class Battle extends AppCompatActivity {
             if (ExtendMeter == 25) {
                 ExtendDrive.setColorFilter(argb(0, 50, 50, 50));
             }
-            if (((int) (Math.random() * (100 - 30 + 1) + 30)) - byteEvasion > 60) {
+            if ((((int) (Math.random() * (100 - 30 + 1) + 30)) - byteEvasion) > 60) {
                 byteHP -= enemyAttack;
-                playerBar.setProgress(byteHP%byteMaxHP);
+                if (byteHP > byteMaxHP) playerBar.setProgress(100);
+                else playerBar.setProgress(byteHP%byteMaxHP);
                 battleplayerhp.setText(byteHP+"/"+byteMaxHP);
             } //enemy counterattack
             if (byteHP<=0) {finish();}
@@ -137,9 +146,13 @@ public class Battle extends AppCompatActivity {
                     break;
                 case "PenguRanger":
                     byteEvasion = 100;
+                    bytecharacter.setImageAlpha(60);
+                    shieldcountdown = 5;
                     break;
                 case "Salacommander":
                     enemyHP -= 200;
+                    enemyBar.setProgress(enemyHP/100);
+                    enemyhptext.setText(enemyHP+"/"+enemymaxHP);
                     break;
             }
             ExtendMeter = 0;
