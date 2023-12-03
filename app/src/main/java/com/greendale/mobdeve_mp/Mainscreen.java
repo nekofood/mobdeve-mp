@@ -7,6 +7,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -26,11 +30,56 @@ public class Mainscreen extends AppCompatActivity {
     Boolean foodToggle,waterToggle,careToggle;
     TextView SharedPrefTest;
 
+    // ***** Sensor related crap *****
+    private int shakeCounter = 0;
+    final int SHAKE_THRESHOLD = 12;
+    private float lastX, lastY, lastZ = 0.0f;
+    private double accel, accelLast;
+    private SensorManager sensorManager;
+    private Sensor sensor;
+
+    //Code for detecting shakes
+    private SensorEventListener shakeListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            float x = event.values[0];
+            float y = event.values[0];
+            float z = event.values[0];
+
+            float deltaX = x - lastX;
+            float deltaY = y - lastY;
+            float deltaZ = z - lastZ;
+
+            accel = Math.sqrt((double) (x*x)+(y*y)+(z*z));
+            double delta = accel - accelLast;
+
+            if (delta > SHAKE_THRESHOLD) {
+                ++shakeCounter;
+            }
+
+            if (shakeCounter >= 3) {
+                shakeCounter = 0;
+                putFoodInTheDamnBowl();
+            }
+            accelLast = accel;
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
+
+    // ***** Sensor related crap ends here *****
+
     int needHunger, needThirst, needLove = 100; //fallback value is 100
 
     final int MAX_HUNGER = 100;
     final int MAX_THIRST = 100;
     final int MAX_LOVE = 100;
+
+    //how much of a stat is replenished when satiating it
+    final int STAT_REPLENISH = 50;
 
     TextView hungerText; //DEBUG
 
@@ -58,6 +107,13 @@ public class Mainscreen extends AppCompatActivity {
         foodToggle = false;
         waterToggle = false;
         careToggle = false;
+
+        accel = SensorManager.GRAVITY_EARTH;
+        accelLast = SensorManager.GRAVITY_EARTH;
+
+        //Sensors
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
 
         //debugging textview
         hungerText = (TextView) findViewById(R.id.debugTextViewHunger);
@@ -118,6 +174,9 @@ public class Mainscreen extends AppCompatActivity {
             {
                 bowl.setImageResource(R.drawable.foodbowlempty);
                 container.setImageResource(R.drawable.megabites);
+
+                //activate sensor
+                sensorManager.registerListener(shakeListener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
             }
             else
             {
@@ -131,7 +190,26 @@ public class Mainscreen extends AppCompatActivity {
             careButton.setVisibility(View.VISIBLE);
             waterButton.setVisibility(View.VISIBLE);
             graphicIndicator.setVisibility(View.GONE);
+
+            sensorManager.unregisterListener(shakeListener);
         }
+    }
+
+    public void putFoodInTheDamnBowl() {
+        //Do nothing if not in feeding mode
+        if (!foodToggle) {
+            return;
+        }
+        //otherwise, feed
+        needHunger = Math.min(100, needHunger + STAT_REPLENISH);
+
+        //violate DRY
+        foodToggle = false;
+        careButton.setVisibility(View.VISIBLE);
+        waterButton.setVisibility(View.VISIBLE);
+        graphicIndicator.setVisibility(View.GONE);
+
+        sensorManager.unregisterListener(shakeListener);
     }
     public void giveWater(View v){
         if (!waterToggle){
@@ -201,6 +279,11 @@ public class Mainscreen extends AppCompatActivity {
         needLove = sharedPreferences.getInt("BCLOVE", 100);
     }
 
+    //
+    public void detectShake(SensorEvent event) {
+
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -209,6 +292,7 @@ public class Mainscreen extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        sensorManager.unregisterListener(shakeListener);
         saveData();
     }
 
