@@ -5,6 +5,7 @@ import static android.graphics.Color.argb;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -122,6 +123,8 @@ public class Battle extends AppCompatActivity {
         battlePopup.setVisibility(View.GONE);canFight=true;
     }
     public void Exit(View view){
+        Intent intent = new Intent(this, Mainscreen.class);
+        startActivity(intent);
         finish();
     }
     public void Attack(){
@@ -144,6 +147,8 @@ public class Battle extends AppCompatActivity {
                 int wins = sharedPreferences.getInt("WINS",  5);
                 sharedPreferences.edit().putInt("COINS", increase+current).apply();
                 sharedPreferences.edit().putInt("WINS", wins+1).apply();
+                Intent intent = new Intent(this, Mainscreen.class);
+                startActivity(intent);
                 finish();
             }
             if (ExtendMeter < 25) {

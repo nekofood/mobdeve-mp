@@ -14,6 +14,7 @@ import android.hardware.SensorManager;
 import android.media.Image;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -246,15 +247,17 @@ public class Mainscreen extends AppCompatActivity {
         if (!waterToggle){
             waterToggle = true;
             graphicIndicator.setVisibility(View.VISIBLE);
+            container.setImageResource(R.drawable.waterpitcher);
             //only allow giving water if thirst < max
             if (needThirst < MAX_THIRST)
             {
                 bowl.setImageResource(R.drawable.waterbowlempty);
-                container.setImageResource(R.drawable.waterpitcher);
+                container.setVisibility(View.VISIBLE);
             }
             else
             {
                 bowl.setImageResource(R.drawable.waterbowlfull);
+                container.setVisibility(View.INVISIBLE);
             }
             careButton.setVisibility(View.INVISIBLE);
             foodButton.setVisibility(View.INVISIBLE);
@@ -265,6 +268,17 @@ public class Mainscreen extends AppCompatActivity {
             foodButton.setVisibility(View.VISIBLE);
             graphicIndicator.setVisibility(View.GONE);
         }
+    }
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        // Tap is detected
+        if(action == MotionEvent.ACTION_DOWN){
+            if (careToggle){
+                //care
+                needLove = Math.min(100, needLove + STAT_REPLENISH);
+            }
+        }
+        return true;
     }
     public void giveCare(View v){
         ViewGroup.LayoutParams heartsize = heartIndicator.getLayoutParams();
