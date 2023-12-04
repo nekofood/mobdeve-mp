@@ -3,6 +3,7 @@ package com.greendale.mobdeve_mp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -26,16 +27,15 @@ public class Settings extends AppCompatActivity {
         if(notifsetting.getText().toString().equals("Notifications: ON")){
             notifsetting.setText("Notifications: OFF");
             sharedPreferences.edit().putBoolean("ISNOTIFSON",false).apply();
-            //TODO: Other Setting Stuff for it
         }
         else{
             notifsetting.setText("Notifications: ON");
             sharedPreferences.edit().putBoolean("ISNOTIFSON",true).apply();
-            //TODO: Other Setting Stuff for it
         }
     }
     public void SaveAndExit(View v){
-        //TODO:DO SETTINGS BUSINESS
+        Intent intent = new Intent(Settings.this, Mainscreen.class);
+        startActivity(intent);
         finish();
     }
 }

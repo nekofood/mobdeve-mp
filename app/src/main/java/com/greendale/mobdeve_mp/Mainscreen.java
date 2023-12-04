@@ -196,10 +196,12 @@ public class Mainscreen extends AppCompatActivity {
     public void GoToShop(View v){
         Intent intent = new Intent(Mainscreen.this, ShopActivity.class);
         startActivity(intent);
+        finish();
     }
     public void GoToSettings(View v){
         Intent intent = new Intent(Mainscreen.this, Settings.class);
         startActivity(intent);
+        finish();
     }
     public void Advance(View v) {
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);

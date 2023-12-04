@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentResultListener;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -68,6 +69,8 @@ public class ShopActivity extends AppCompatActivity {
         shopBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(ShopActivity.this, Mainscreen.class);
+                startActivity(intent);
                 finish();
             }
         });
