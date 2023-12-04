@@ -24,6 +24,8 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import org.w3c.dom.Text;
+
 public class Mainscreen extends AppCompatActivity {
     FrameLayout slideMenu;
     ConstraintLayout graphicIndicator;
@@ -85,7 +87,7 @@ public class Mainscreen extends AppCompatActivity {
     //how much of a stat is replenished when satiating it
     final int STAT_REPLENISH = 50;
 
-    TextView hungerText; //DEBUG
+    TextView hungerText, thirstText, careText; //graphic indicators
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -123,6 +125,11 @@ public class Mainscreen extends AppCompatActivity {
 
         //debugging textview
         hungerText = (TextView) findViewById(R.id.debugTextViewHunger);
+        thirstText = (TextView) findViewById(R.id.thirstLevel);
+        careText = (TextView) findViewById(R.id.carelevel);
+        hungerText.setVisibility(View.GONE);
+        thirstText.setVisibility(View.GONE);
+        careText.setVisibility(View.GONE);
 
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
@@ -200,6 +207,9 @@ public class Mainscreen extends AppCompatActivity {
     public void giveFood(View v){
         if (!foodToggle){
             foodToggle = true;
+            hungerText.setVisibility(View.VISIBLE);
+            loadData();
+            hungerText.setText(needHunger+"%");
             graphicIndicator.setVisibility(View.VISIBLE);
             //only allow feeding if hunger < max
             if (needHunger < MAX_HUNGER)
@@ -222,7 +232,7 @@ public class Mainscreen extends AppCompatActivity {
             careButton.setVisibility(View.VISIBLE);
             waterButton.setVisibility(View.VISIBLE);
             graphicIndicator.setVisibility(View.GONE);
-
+            hungerText.setVisibility(View.GONE);
             sensorManager.unregisterListener(shakeListener);
         }
     }
@@ -233,20 +243,24 @@ public class Mainscreen extends AppCompatActivity {
             return;
         }
         //otherwise, feed
+        loadData();
         needHunger = Math.min(100, needHunger + STAT_REPLENISH);
-
+        saveData();
         //violate DRY
         foodToggle = false;
         careButton.setVisibility(View.VISIBLE);
         waterButton.setVisibility(View.VISIBLE);
         graphicIndicator.setVisibility(View.GONE);
-
+        hungerText.setVisibility(View.GONE);
         sensorManager.unregisterListener(shakeListener);
     }
     public void giveWater(View v){
         if (!waterToggle){
             waterToggle = true;
             graphicIndicator.setVisibility(View.VISIBLE);
+            thirstText.setVisibility(View.VISIBLE);
+            loadData();
+            thirstText.setText(needThirst+"%");
             container.setImageResource(R.drawable.waterpitcher);
             //only allow giving water if thirst < max
             if (needThirst < MAX_THIRST)
@@ -266,6 +280,7 @@ public class Mainscreen extends AppCompatActivity {
             waterToggle = false;
             careButton.setVisibility(View.VISIBLE);
             foodButton.setVisibility(View.VISIBLE);
+            thirstText.setVisibility(View.GONE);
             graphicIndicator.setVisibility(View.GONE);
         }
     }
@@ -276,6 +291,7 @@ public class Mainscreen extends AppCompatActivity {
             if (careToggle){
                 //care
                 needLove = Math.min(100, needLove + STAT_REPLENISH);
+                saveData();
             }
         }
         return true;
@@ -288,12 +304,16 @@ public class Mainscreen extends AppCompatActivity {
         if (!careToggle){
             careToggle = true;
             heartIndicator.setVisibility(View.VISIBLE);
+            careText.setVisibility(View.VISIBLE);
+            loadData();
+            careText.setText(needLove+"%");
             waterButton.setVisibility(View.INVISIBLE);
             foodButton.setVisibility(View.INVISIBLE);
         }
         else{
             careToggle = false;
             heartIndicator.setVisibility(View.INVISIBLE);
+            careText.setVisibility(View.GONE);
             foodButton.setVisibility(View.VISIBLE);
             waterButton.setVisibility(View.VISIBLE);
             graphicIndicator.setVisibility(View.GONE);
