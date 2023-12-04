@@ -21,7 +21,7 @@ public class StatDecreaseService extends Service {
 	HandlerThread handlerThread;
 	Context context = this;
 	NotificationManager notifManager;
-	int needHunger, needThirst, needLove = 100; //fallback value is 100
+	int needHunger, needThirst, needLove;
 
 	final int MAX_HUNGER = 100;
 	final int MAX_THIRST = 100;
@@ -84,7 +84,7 @@ public class StatDecreaseService extends Service {
 		SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
 
 		needHunger = sharedPreferences.getInt("BCHUNGER", 100);
-		needThirst = sharedPreferences.getInt("BCTHURST", 100);
+		needThirst = sharedPreferences.getInt("BCTHIRST", 100);
 		needLove = sharedPreferences.getInt("BCLOVE", 100);
 		hasFoodBoost = sharedPreferences.getBoolean("HAS_FOODBOOST", false);
 		hasWaterBoost = sharedPreferences.getBoolean("HAS_WATERBOOST", false);
@@ -125,8 +125,8 @@ public class StatDecreaseService extends Service {
 		//(we achieve this using a ternary operation)
 		//Also prevent stats from going negative using a max()
 		needHunger = Math.max(0, needHunger - (hasFoodBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
-		needThirst = Math.max(0, needHunger - (hasWaterBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
-		needLove = Math.max(0, needHunger - (hasLoveBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
+		needThirst = Math.max(0, needThirst - (hasWaterBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
+		needLove = Math.max(0, needLove - (hasLoveBoost ? REDUCE_RATE / 2 : REDUCE_RATE));
 
 		if (notificationOn) {
 			//Set up notification builders
