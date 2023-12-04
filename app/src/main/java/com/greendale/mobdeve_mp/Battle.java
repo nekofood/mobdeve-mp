@@ -196,7 +196,7 @@ public class Battle extends AppCompatActivity {
                     byteEvasion = 100;
                     pengushroud.start();
                     bytecharacter.setImageAlpha(60);
-                    shieldcountdown = 5;
+                    shieldcountdown = 20;
                     break;
                 case "Salacommander":
                     enemyHP -= 200;
