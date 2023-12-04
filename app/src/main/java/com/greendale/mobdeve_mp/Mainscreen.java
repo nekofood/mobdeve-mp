@@ -335,10 +335,16 @@ public class Mainscreen extends AppCompatActivity {
         // Tap is detected
         if(action == MotionEvent.ACTION_DOWN){
             if (careToggle){
-                loadData()
+                loadData();
                 //care
                 needLove = Math.min(MAX_LOVE, needLove + STAT_REPLENISH);
-                saveData()
+                saveData();
+                careToggle = false;
+                heartIndicator.setVisibility(View.INVISIBLE);
+                careText.setVisibility(View.GONE);
+                foodButton.setVisibility(View.VISIBLE);
+                waterButton.setVisibility(View.VISIBLE);
+                graphicIndicator.setVisibility(View.GONE);
             }
         }
         return true;
