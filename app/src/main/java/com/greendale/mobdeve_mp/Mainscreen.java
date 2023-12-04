@@ -219,7 +219,6 @@ public class Mainscreen extends AppCompatActivity {
         if (!foodToggle){
             foodToggle = true;
             hungerText.setVisibility(View.VISIBLE);
-            loadData();
             hungerText.setText(needHunger+"%");
             graphicIndicator.setVisibility(View.VISIBLE);
             gesture.setImageResource(R.drawable.shakeicon);
@@ -279,7 +278,6 @@ public class Mainscreen extends AppCompatActivity {
             gesture.setAnimation(null);
             gesture.setImageResource(R.drawable.tapicon);
             gesture.setAnimation(AnimationUtils.loadAnimation(this,R.anim.growshrink));
-            loadData();
             thirstText.setText(needThirst+"%");
             container.setImageResource(R.drawable.waterpitcher);
             //only allow giving water if thirst < max
