@@ -34,8 +34,6 @@ public class Settings extends AppCompatActivity {
         }
     }
     public void SaveAndExit(View v){
-        Intent intent = new Intent(Settings.this, Mainscreen.class);
-        startActivity(intent);
         finish();
     }
 }
