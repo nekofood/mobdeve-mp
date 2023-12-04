@@ -111,6 +111,7 @@ public class Mainscreen extends AppCompatActivity {
     final int STAT_REPLENISH = 75;
 
     TextView hungerText, thirstText, careText; //graphic indicators
+    MediaPlayer foodMP, waterMP, loveMP; //sound indicators
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -152,6 +153,11 @@ public class Mainscreen extends AppCompatActivity {
         hungerText.setVisibility(View.GONE);
         thirstText.setVisibility(View.GONE);
         careText.setVisibility(View.GONE);
+
+        //sound initialization
+        foodMP = MediaPlayer.create(getApplicationContext(), R.raw.food);
+        waterMP = MediaPlayer.create(getApplicationContext(), R.raw.water);
+        loveMP = MediaPlayer.create(getApplicationContext(), R.raw.love);
 
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
@@ -272,8 +278,7 @@ public class Mainscreen extends AppCompatActivity {
         //otherwise, feed
         loadData();
         needHunger = Math.min(MAX_HUNGER, needHunger + STAT_REPLENISH);
-        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.food);
-        mp.start();
+        foodMP.start();
         //violate DRY
         foodToggle = false;
         careButton.setVisibility(View.VISIBLE);
@@ -326,7 +331,7 @@ public class Mainscreen extends AppCompatActivity {
         }
         //otherwise, give water
         needThirst = Math.min(MAX_THIRST, needThirst + STAT_REPLENISH);
-
+        waterMP.start();
         waterToggle = false;
         careButton.setVisibility(View.VISIBLE);
         foodButton.setVisibility(View.VISIBLE);
@@ -344,8 +349,7 @@ public class Mainscreen extends AppCompatActivity {
                 //care
                 needLove = Math.min(MAX_LOVE, needLove + STAT_REPLENISH);
                 saveData();
-                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.love);
-                mp.start();
+                loveMP.start();
                 careToggle = false;
                 heartIndicator.setVisibility(View.INVISIBLE);
                 careText.setVisibility(View.GONE);
