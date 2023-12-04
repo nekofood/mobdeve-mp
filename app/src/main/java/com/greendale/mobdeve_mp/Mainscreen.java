@@ -227,6 +227,8 @@ public class Mainscreen extends AppCompatActivity {
             hungerText.setVisibility(View.VISIBLE);
             hungerText.setText(needHunger+"%");
             graphicIndicator.setVisibility(View.VISIBLE);
+            container.setVisibility(View.VISIBLE);
+            bowl.setVisibility(View.VISIBLE);
             gesture.setImageResource(R.drawable.shakeicon);
             gesture.setAnimation(AnimationUtils.loadAnimation(this,R.anim.infiniteshake));
             //only allow feeding if hunger < max
@@ -284,6 +286,8 @@ public class Mainscreen extends AppCompatActivity {
         if (!waterToggle){
             waterToggle = true;
             graphicIndicator.setVisibility(View.VISIBLE);
+            container.setVisibility(View.VISIBLE);
+            bowl.setVisibility(View.VISIBLE);
             thirstText.setVisibility(View.VISIBLE);
             gesture.setAnimation(null);
             gesture.setImageResource(R.drawable.tapicon);
