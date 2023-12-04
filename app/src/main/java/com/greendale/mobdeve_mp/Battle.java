@@ -25,8 +25,8 @@ public class Battle extends AppCompatActivity {
     ImageView bytecharacter,enemybyte,BEDIcon;
     TextView sharedpreftesttwo, battleplayerhp, enemyhptext, wintest;
     Boolean canFight = true;
-    int enemyHP = (int)(Math.random() * (1000-800+1)+800);
-    int enemymaxHP = enemyHP;
+    float enemyHP = (float)(Math.random() * (1000-800+1)+800);
+    float enemymaxHP = enemyHP;
     int enemyAttack = (int)(Math.random() * 3 + 1);
     int byteAttack, byteEvasion, byteHP, byteMaxHP, byteSetEvasion, shieldcountdown;
     int enemyspecies = (int)(Math.random() * 3 + 1);
@@ -119,11 +119,11 @@ public class Battle extends AppCompatActivity {
                 break;
         }
         GenerateRandomEnemy();
-        enemyBar.setProgress(enemyHP%enemymaxHP);
+        enemyBar.setProgress((int)Math.round(enemyHP/enemymaxHP*100.0));
         byteMaxHP = byteHP;
         playerBar.setProgress(byteHP%byteMaxHP);
         battleplayerhp.setText(byteHP+"/"+byteMaxHP);
-        enemyhptext.setText(enemyHP+"/"+enemymaxHP);
+        enemyhptext.setText(Math.round(enemyHP)+"/"+Math.round(enemymaxHP));
         wintest.setVisibility(View.INVISIBLE);
     }
     public void Pause(View view) {
@@ -142,8 +142,8 @@ public class Battle extends AppCompatActivity {
             enemyHP = Math.max(0, enemyHP - byteAttack);
             hit.start();
             enemybyte.setAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
-            enemyBar.setProgress(enemyHP/100);
-            enemyhptext.setText(enemyHP+"/"+enemymaxHP);
+            enemyBar.setProgress((int)Math.round(enemyHP/enemymaxHP*100.0));
+            enemyhptext.setText(Math.round(enemyHP)+"/"+Math.round(enemymaxHP));
             if (shieldcountdown >0) {
                 shieldcountdown--;
                 if (shieldcountdown==0){
@@ -201,8 +201,8 @@ public class Battle extends AppCompatActivity {
                 case "Salacommander":
                     enemyHP -= 200;
                     artillery.start();
-                    enemyBar.setProgress(enemyHP/100);
-                    enemyhptext.setText(enemyHP+"/"+enemymaxHP);
+                    enemyBar.setProgress((int)Math.round(enemyHP/enemymaxHP*100.0));
+                    enemyhptext.setText(Math.round(enemyHP)+"/"+Math.round(enemymaxHP));
                     break;
             }
             ExtendMeter = 0;
