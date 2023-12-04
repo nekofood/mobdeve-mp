@@ -12,6 +12,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MotionEvent;
@@ -137,7 +138,6 @@ public class Mainscreen extends AppCompatActivity {
         foodToggle = false;
         waterToggle = false;
         careToggle = false;
-
         accel = SensorManager.GRAVITY_EARTH;
         accelLast = SensorManager.GRAVITY_EARTH;
 
@@ -269,7 +269,8 @@ public class Mainscreen extends AppCompatActivity {
         //otherwise, feed
         loadData();
         needHunger = Math.min(MAX_HUNGER, needHunger + STAT_REPLENISH);
-      
+        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.food);
+        mp.start();
         //violate DRY
         foodToggle = false;
         careButton.setVisibility(View.VISIBLE);
