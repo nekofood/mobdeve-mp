@@ -11,6 +11,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -139,6 +140,7 @@ public class Battle extends AppCompatActivity {
         if (canFight) {
             enemyHP = Math.max(0, enemyHP - byteAttack);
             hit.start();
+            enemybyte.setAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
             enemyBar.setProgress(enemyHP/100);
             enemyhptext.setText(enemyHP+"/"+enemymaxHP);
             if (shieldcountdown >0) {
@@ -172,6 +174,7 @@ public class Battle extends AppCompatActivity {
             if ((((int) (Math.random() * (100 - 30 + 1) + 30)) - byteEvasion) > 60) {
                 byteHP -= enemyAttack;
                 hit.start();
+                bytecharacter.setAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
                 if (byteHP > byteMaxHP) playerBar.setProgress(100);
                 else playerBar.setProgress(byteHP%byteMaxHP);
                 battleplayerhp.setText(byteHP+"/"+byteMaxHP);
