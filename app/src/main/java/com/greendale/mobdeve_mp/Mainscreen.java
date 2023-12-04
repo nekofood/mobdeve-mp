@@ -145,7 +145,6 @@ public class Mainscreen extends AppCompatActivity {
         //Sensors
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-
         //debugging textview
         hungerText = (TextView) findViewById(R.id.debugTextViewHunger);
         thirstText = (TextView) findViewById(R.id.thirstLevel);
@@ -186,6 +185,8 @@ public class Mainscreen extends AppCompatActivity {
         //load current hunger/thirst/love values into ints
         loadData();
         //check if pet should be gone
+        if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
+        else bytePet.setVisibility(View.VISIBLE);
     }
 
     @Override
