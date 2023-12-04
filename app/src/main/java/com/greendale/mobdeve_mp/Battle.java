@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Battle extends AppCompatActivity {
     FrameLayout battlePopup;
@@ -129,7 +130,7 @@ public class Battle extends AppCompatActivity {
     }
     public void Attack(){
         if (canFight) {
-            enemyHP -= byteAttack;
+            enemyHP = Math.max(0, enemyHP - byteAttack);
             enemyBar.setProgress(enemyHP/100);
             enemyhptext.setText(enemyHP+"/"+enemymaxHP);
             if (shieldcountdown >0) {
@@ -139,12 +140,15 @@ public class Battle extends AppCompatActivity {
                     bytecharacter.setImageAlpha(255);
                 }
             }
+            //If enemyHP <= 0, you win!
             if (enemyHP <= 0) {
                 SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
                 canFight=false;
                 int increase = (int)(Math.random() * (25-15+1)+15);
                 int current = sharedPreferences.getInt("COINS",  100);
                 int wins = sharedPreferences.getInt("WINS",  5);
+                Toast toast = Toast.makeText(this, "You win! You earned " + increase + " coins!", Toast.LENGTH_SHORT);
+                toast.show();
                 sharedPreferences.edit().putInt("COINS", increase+current).apply();
                 sharedPreferences.edit().putInt("WINS", wins+1).apply();
                 Intent intent = new Intent(this, Mainscreen.class);
