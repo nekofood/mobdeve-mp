@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -222,6 +223,7 @@ public class Mainscreen extends AppCompatActivity {
             hungerText.setText(needHunger+"%");
             graphicIndicator.setVisibility(View.VISIBLE);
             gesture.setImageResource(R.drawable.shakeicon);
+            gesture.setAnimation(AnimationUtils.loadAnimation(this,R.anim.infiniteshake));
             //only allow feeding if hunger < max
             if (needHunger < MAX_HUNGER)
             {
@@ -257,6 +259,8 @@ public class Mainscreen extends AppCompatActivity {
         loadData();
         needHunger = Math.min(MAX_HUNGER, needHunger + STAT_REPLENISH);
         foodMP.start();
+        if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
+        else bytePet.setVisibility(View.VISIBLE);
         //violate DRY
         foodToggle = false;
         careButton.setVisibility(View.VISIBLE);
@@ -272,16 +276,17 @@ public class Mainscreen extends AppCompatActivity {
             waterToggle = true;
             graphicIndicator.setVisibility(View.VISIBLE);
             thirstText.setVisibility(View.VISIBLE);
+            gesture.setAnimation(null);
+            gesture.setImageResource(R.drawable.tapicon);
+            gesture.setAnimation(AnimationUtils.loadAnimation(this,R.anim.infiniteshake));
             loadData();
             thirstText.setText(needThirst+"%");
             container.setImageResource(R.drawable.waterpitcher);
-            gesture.setImageResource(R.drawable.tilticon);
             //only allow giving water if thirst < max
             if (needThirst < MAX_THIRST)
             {
                 bowl.setImageResource(R.drawable.waterbowlempty);
                 container.setVisibility(View.VISIBLE);
-
             }
             else
             {
@@ -309,6 +314,8 @@ public class Mainscreen extends AppCompatActivity {
         //otherwise, give water
         needThirst = Math.min(MAX_THIRST, needThirst + STAT_REPLENISH);
         waterMP.start();
+        if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
+        else bytePet.setVisibility(View.VISIBLE);
         waterToggle = false;
         thirstText.setVisibility(View.GONE);
         careButton.setVisibility(View.VISIBLE);
@@ -345,6 +352,12 @@ public class Mainscreen extends AppCompatActivity {
         heartsize.height = needLove;
         heartsize.width = needLove;
         heartIndicator.setLayoutParams(heartsize);
+        gesture.setImageResource(R.drawable.tapicon);
+        graphicIndicator.setVisibility(View.VISIBLE);
+        container.setVisibility(View.INVISIBLE);
+        bowl.setVisibility(View.INVISIBLE);
+        gesture.setVisibility(View.VISIBLE);
+        gesture.setAnimation(AnimationUtils.loadAnimation(this,R.anim.growshrink));
         if (!careToggle){
             careToggle = true;
             heartIndicator.setVisibility(View.VISIBLE);
