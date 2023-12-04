@@ -11,12 +11,12 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Battle extends AppCompatActivity {
     FrameLayout battlePopup;
@@ -137,8 +137,7 @@ public class Battle extends AppCompatActivity {
     }
     public void Attack(){
         if (canFight) {
-            enemyHP -= byteAttack;
-            enemybyte.setAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
+            enemyHP = Math.max(0, enemyHP - byteAttack);
             hit.start();
             enemyBar.setProgress(enemyHP/100);
             enemyhptext.setText(enemyHP+"/"+enemymaxHP);
@@ -149,12 +148,15 @@ public class Battle extends AppCompatActivity {
                     bytecharacter.setImageAlpha(255);
                 }
             }
+            //If enemyHP <= 0, you win!
             if (enemyHP <= 0) {
                 SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
                 canFight=false;
                 int increase = (int)(Math.random() * (25-15+1)+15);
                 int current = sharedPreferences.getInt("COINS",  100);
                 int wins = sharedPreferences.getInt("WINS",  5);
+                Toast toast = Toast.makeText(this, "You win! You earned " + increase + " coins!", Toast.LENGTH_SHORT);
+                toast.show();
                 sharedPreferences.edit().putInt("COINS", increase+current).apply();
                 sharedPreferences.edit().putInt("WINS", wins+1).apply();
                 Intent intent = new Intent(this, Mainscreen.class);
@@ -170,7 +172,6 @@ public class Battle extends AppCompatActivity {
             if ((((int) (Math.random() * (100 - 30 + 1) + 30)) - byteEvasion) > 60) {
                 byteHP -= enemyAttack;
                 hit.start();
-                bytecharacter.setAnimation(AnimationUtils.loadAnimation(this,R.anim.shake));
                 if (byteHP > byteMaxHP) playerBar.setProgress(100);
                 else playerBar.setProgress(byteHP%byteMaxHP);
                 battleplayerhp.setText(byteHP+"/"+byteMaxHP);
