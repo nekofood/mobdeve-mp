@@ -106,21 +106,23 @@
         android:id="@+id/debugTextViewHunger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:fontFamily="@font/passion_one"
         android:text="TextView"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/foodButton"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/foodButton"
+        app:layout_constraintStart_toStartOf="@+id/foodButton" />
 
     <ImageView
         android:id="@+id/heartIndicator"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="50dp"
+        android:src="@drawable/heart"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/bytePet"
         app:layout_constraintEnd_toEndOf="@+id/bytePet"
-        app:layout_constraintStart_toStartOf="@+id/bytePet"
-        android:src="@drawable/heart" />
+        app:layout_constraintStart_toStartOf="@+id/bytePet" />
 
     <TextView
         android:id="@+id/SharedPrefTest"
@@ -158,6 +160,28 @@
         app:layout_constraintStart_toStartOf="@+id/advancebutton"
         app:layout_constraintTop_toTopOf="@+id/advancebutton" />
 
+    <TextView
+        android:id="@+id/thirstLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/passion_one"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/waterButton"
+        app:layout_constraintEnd_toEndOf="@+id/waterButton"
+        app:layout_constraintStart_toStartOf="@+id/waterButton" />
+
+    <TextView
+        android:id="@+id/carelevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/passion_one"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/careButton"
+        app:layout_constraintEnd_toEndOf="@+id/careButton"
+        app:layout_constraintStart_toStartOf="@+id/careButton" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/graphicIndicator"
         android:layout_width="match_parent"
@@ -171,7 +195,7 @@
             android:id="@+id/bowl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="190dp"
+            android:layout_marginBottom="200dp"
             android:src="@drawable/foodbowlempty"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
