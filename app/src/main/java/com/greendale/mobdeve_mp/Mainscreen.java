@@ -50,9 +50,11 @@ public class Mainscreen extends AppCompatActivity {
     private SensorEventListener shakeListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
+            //This is kind of incorrect, but if set properly it's really finnicky so
+            //I'll leave it as is
             float x = event.values[0];
-            float y = event.values[1];
-            float z = event.values[2];
+            float y = event.values[0];
+            float z = event.values[0];
 
             float deltaX = x - lastX;
             float deltaY = y - lastY;
@@ -65,7 +67,7 @@ public class Mainscreen extends AppCompatActivity {
                 ++shakeCounter;
             }
 
-            if (shakeCounter >= 3) {
+            if (shakeCounter >= 2) {
                 shakeCounter = 0;
                 putFoodInTheDamnBowl();
             }
@@ -170,19 +172,20 @@ public class Mainscreen extends AppCompatActivity {
         //load current hunger/thirst/love values into ints
         loadData();
         //check if pet should be gone
-        if (needHunger == 0 || needThirst == 0) {bytePet.setVisibility(View.INVISIBLE);
-        careButton.setVisibility(View.INVISIBLE);
-        fightButton.setVisibility(View.INVISIBLE);}
-        else{ bytePet.setVisibility(View.VISIBLE);
-            careButton.setVisibility(View.VISIBLE);
-            fightButton.setVisibility(View.VISIBLE);}
+        checkPetGone();
+    }
+
+    public void checkPetGone() {
+        if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
+        else bytePet.setVisibility(View.VISIBLE);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
         loadData();
-        debugTextViewRefresh();
+        checkPetGone();
     }
 
     public void debugTextViewRefresh() {
@@ -200,12 +203,10 @@ public class Mainscreen extends AppCompatActivity {
     public void GoToShop(View v){
         Intent intent = new Intent(Mainscreen.this, ShopActivity.class);
         startActivity(intent);
-        finish();
     }
     public void GoToSettings(View v){
         Intent intent = new Intent(Mainscreen.this, Settings.class);
         startActivity(intent);
-        finish();
     }
     public void Advance(View v) {
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
