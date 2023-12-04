@@ -31,7 +31,7 @@ public class Mainscreen extends AppCompatActivity {
     FrameLayout slideMenu;
     ConstraintLayout graphicIndicator;
     ImageButton fightButton, foodButton, waterButton, careButton, advButton;
-    ImageView bowl, container,heartIndicator, bytePet;
+    ImageView bowl, container,heartIndicator, bytePet, gesture;
 
     TextView advText;
     Boolean foodToggle,waterToggle,careToggle;
@@ -111,6 +111,7 @@ public class Mainscreen extends AppCompatActivity {
     final int STAT_REPLENISH = 75;
 
     TextView hungerText, thirstText, careText; //graphic indicators
+    MediaPlayer foodMP, waterMP, loveMP; //sound indicators
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -129,6 +130,7 @@ public class Mainscreen extends AppCompatActivity {
         bytePet = (ImageView) findViewById(R.id.bytePet);
         bowl = (ImageView) findViewById(R.id.bowl);
         container = (ImageView) findViewById(R.id.container);
+        gesture = (ImageView) findViewById(R.id.gesture);
         heartIndicator = (ImageView) findViewById(R.id.heartIndicator);
         SharedPrefTest = (TextView) findViewById(R.id.SharedPrefTest);
         advButton = (ImageButton) findViewById(R.id.advancebutton);
@@ -144,7 +146,6 @@ public class Mainscreen extends AppCompatActivity {
         //Sensors
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-
         //debugging textview
         hungerText = (TextView) findViewById(R.id.debugTextViewHunger);
         thirstText = (TextView) findViewById(R.id.thirstLevel);
@@ -152,6 +153,11 @@ public class Mainscreen extends AppCompatActivity {
         hungerText.setVisibility(View.GONE);
         thirstText.setVisibility(View.GONE);
         careText.setVisibility(View.GONE);
+
+        //sound initialization
+        foodMP = MediaPlayer.create(getApplicationContext(), R.raw.food);
+        waterMP = MediaPlayer.create(getApplicationContext(), R.raw.water);
+        loveMP = MediaPlayer.create(getApplicationContext(), R.raw.love);
 
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         String Species = sharedPreferences.getString("BSPECIES", "Birthday Bear");
@@ -185,6 +191,8 @@ public class Mainscreen extends AppCompatActivity {
         //load current hunger/thirst/love values into ints
         loadData();
         //check if pet should be gone
+        if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
+        else bytePet.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -235,6 +243,7 @@ public class Mainscreen extends AppCompatActivity {
             loadData();
             hungerText.setText(needHunger+"%");
             graphicIndicator.setVisibility(View.VISIBLE);
+            gesture.setImageResource(R.drawable.shakeicon);
             //only allow feeding if hunger < max
             if (needHunger < MAX_HUNGER)
             {
@@ -269,8 +278,7 @@ public class Mainscreen extends AppCompatActivity {
         //otherwise, feed
         loadData();
         needHunger = Math.min(MAX_HUNGER, needHunger + STAT_REPLENISH);
-        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.food);
-        mp.start();
+        foodMP.start();
         //violate DRY
         foodToggle = false;
         careButton.setVisibility(View.VISIBLE);
@@ -289,6 +297,7 @@ public class Mainscreen extends AppCompatActivity {
             loadData();
             thirstText.setText(needThirst+"%");
             container.setImageResource(R.drawable.waterpitcher);
+            gesture.setImageResource(R.drawable.tilticon);
             //only allow giving water if thirst < max
             if (needThirst < MAX_THIRST)
             {
@@ -322,7 +331,7 @@ public class Mainscreen extends AppCompatActivity {
         }
         //otherwise, give water
         needThirst = Math.min(MAX_THIRST, needThirst + STAT_REPLENISH);
-
+        waterMP.start();
         waterToggle = false;
         careButton.setVisibility(View.VISIBLE);
         foodButton.setVisibility(View.VISIBLE);
@@ -340,6 +349,7 @@ public class Mainscreen extends AppCompatActivity {
                 //care
                 needLove = Math.min(MAX_LOVE, needLove + STAT_REPLENISH);
                 saveData();
+                loveMP.start();
                 careToggle = false;
                 heartIndicator.setVisibility(View.INVISIBLE);
                 careText.setVisibility(View.GONE);
@@ -393,7 +403,7 @@ public class Mainscreen extends AppCompatActivity {
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         needHunger = sharedPreferences.getInt("BCHUNGER", 100);
-        needThirst = sharedPreferences.getInt("BCTHURST", 100);
+        needThirst = sharedPreferences.getInt("BCTHIRST", 100);
         needLove = sharedPreferences.getInt("BCLOVE", 100);
     }
 

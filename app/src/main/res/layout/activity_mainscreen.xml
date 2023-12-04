@@ -141,6 +141,7 @@
         android:layout_marginTop="150dp"
         android:contentDescription="advance button"
         android:onClick="Advance"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mainscreenBg"
@@ -155,6 +156,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#FFFFFF"
         android:textSize="34sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/advancebutton"
         app:layout_constraintEnd_toEndOf="@+id/advancebutton"
         app:layout_constraintStart_toStartOf="@+id/advancebutton"
@@ -190,6 +192,17 @@
         tools:layout_editor_absoluteX="-52dp"
         tools:layout_editor_absoluteY="70dp"
         tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/gesture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="200dp"
+            android:src="@drawable/shakeicon"
+            app:layout_constraintBottom_toBottomOf="@+id/bowl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/shakeicon" />
 
         <ImageView
             android:id="@+id/bowl"

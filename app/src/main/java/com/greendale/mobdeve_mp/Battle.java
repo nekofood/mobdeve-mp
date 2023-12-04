@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,6 +32,7 @@ public class Battle extends AppCompatActivity {
     ProgressBar enemyBar, playerBar;
     int ExtendMeter = 0;
     String Species;
+    MediaPlayer hit, pengushroud, cake, artillery;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,11 @@ public class Battle extends AppCompatActivity {
         battleplayerhp = (TextView) findViewById(R.id.battlePlayerHp);
         enemyhptext = (TextView) findViewById(R.id.enemyHptext);
         wintest = (TextView) findViewById(R.id.wintest);
+        //soundfx
+        pengushroud = MediaPlayer.create(getApplicationContext(), R.raw.tone);
+        hit = MediaPlayer.create(getApplicationContext(), R.raw.hithurt);
+        artillery = MediaPlayer.create(getApplicationContext(), R.raw.explosion);
+        cake = MediaPlayer.create(getApplicationContext(), R.raw.powerup);
         //sharedprefs
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         int wins = sharedPreferences.getInt("WINS",  5);
@@ -131,6 +138,7 @@ public class Battle extends AppCompatActivity {
     public void Attack(){
         if (canFight) {
             enemyHP = Math.max(0, enemyHP - byteAttack);
+            hit.start();
             enemyBar.setProgress(enemyHP/100);
             enemyhptext.setText(enemyHP+"/"+enemymaxHP);
             if (shieldcountdown >0) {
@@ -163,6 +171,7 @@ public class Battle extends AppCompatActivity {
             }
             if ((((int) (Math.random() * (100 - 30 + 1) + 30)) - byteEvasion) > 60) {
                 byteHP -= enemyAttack;
+                hit.start();
                 if (byteHP > byteMaxHP) playerBar.setProgress(100);
                 else playerBar.setProgress(byteHP%byteMaxHP);
                 battleplayerhp.setText(byteHP+"/"+byteMaxHP);
@@ -177,14 +186,17 @@ public class Battle extends AppCompatActivity {
             switch (Species) {
                 case "Birthday Bear":
                     byteHP += 50;
+                    cake.start();
                     break;
                 case "PenguRanger":
                     byteEvasion = 100;
+                    pengushroud.start();
                     bytecharacter.setImageAlpha(60);
                     shieldcountdown = 5;
                     break;
                 case "Salacommander":
                     enemyHP -= 200;
+                    artillery.start();
                     enemyBar.setProgress(enemyHP/100);
                     enemyhptext.setText(enemyHP+"/"+enemymaxHP);
                     break;
