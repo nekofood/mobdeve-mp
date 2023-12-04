@@ -31,7 +31,7 @@ public class Mainscreen extends AppCompatActivity {
     FrameLayout slideMenu;
     ConstraintLayout graphicIndicator;
     ImageButton fightButton, foodButton, waterButton, careButton, advButton;
-    ImageView bowl, container,heartIndicator, bytePet;
+    ImageView bowl, container,heartIndicator, bytePet, gesture;
 
     TextView advText;
     Boolean foodToggle,waterToggle,careToggle;
@@ -129,6 +129,7 @@ public class Mainscreen extends AppCompatActivity {
         bytePet = (ImageView) findViewById(R.id.bytePet);
         bowl = (ImageView) findViewById(R.id.bowl);
         container = (ImageView) findViewById(R.id.container);
+        gesture = (ImageView) findViewById(R.id.gesture);
         heartIndicator = (ImageView) findViewById(R.id.heartIndicator);
         SharedPrefTest = (TextView) findViewById(R.id.SharedPrefTest);
         advButton = (ImageButton) findViewById(R.id.advancebutton);
@@ -235,6 +236,7 @@ public class Mainscreen extends AppCompatActivity {
             loadData();
             hungerText.setText(needHunger+"%");
             graphicIndicator.setVisibility(View.VISIBLE);
+            gesture.setImageResource(R.drawable.shakeicon);
             //only allow feeding if hunger < max
             if (needHunger < MAX_HUNGER)
             {
@@ -289,6 +291,7 @@ public class Mainscreen extends AppCompatActivity {
             loadData();
             thirstText.setText(needThirst+"%");
             container.setImageResource(R.drawable.waterpitcher);
+            gesture.setImageResource(R.drawable.tilticon);
             //only allow giving water if thirst < max
             if (needThirst < MAX_THIRST)
             {
@@ -340,6 +343,8 @@ public class Mainscreen extends AppCompatActivity {
                 //care
                 needLove = Math.min(MAX_LOVE, needLove + STAT_REPLENISH);
                 saveData();
+                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.love);
+                mp.start();
                 careToggle = false;
                 heartIndicator.setVisibility(View.INVISIBLE);
                 careText.setVisibility(View.GONE);
