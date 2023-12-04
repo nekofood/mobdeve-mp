@@ -40,8 +40,6 @@ public class Mainscreen extends AppCompatActivity {
     // ***** Sensor related crap *****
     private int shakeCounter = 0;
     final int SHAKE_THRESHOLD = 12;
-    final int ROT_THRESHOLD_L = 60;
-    final int ROT_THRESHOLD_R = 90;
     private float lastX, lastY, lastZ = 0.0f;
     private double accel, accelLast;
     private SensorManager sensorManager;
@@ -52,8 +50,8 @@ public class Mainscreen extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             float x = event.values[0];
-            float y = event.values[0];
-            float z = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
 
             float deltaX = x - lastX;
             float deltaY = y - lastY;
@@ -71,26 +69,6 @@ public class Mainscreen extends AppCompatActivity {
                 putFoodInTheDamnBowl();
             }
             accelLast = accel;
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-        }
-    };
-
-    private SensorEventListener rotateListener = new SensorEventListener() {
-        @Override
-        public void onSensorChanged(SensorEvent event) {
-            float x = event.values[0];
-            float y = event.values[0];
-            float z = event.values[0];
-
-            double rot = Math.atan2(y, Math.sqrt(x*x + z*z) * 180/Math.PI);
-
-            if (ROT_THRESHOLD_L < rot && rot < ROT_THRESHOLD_R) {
-                pourTheDamnWater();
-            }
         }
 
         @Override
@@ -295,7 +273,6 @@ public class Mainscreen extends AppCompatActivity {
                 bowl.setImageResource(R.drawable.waterbowlempty);
                 container.setVisibility(View.VISIBLE);
 
-                sensorManager.registerListener(rotateListener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
             }
             else
             {
@@ -312,7 +289,6 @@ public class Mainscreen extends AppCompatActivity {
             thirstText.setVisibility(View.GONE);
             graphicIndicator.setVisibility(View.GONE);
 
-            sensorManager.unregisterListener(rotateListener);
         }
     }
     public void pourTheDamnWater() {
@@ -320,15 +296,16 @@ public class Mainscreen extends AppCompatActivity {
         if (!waterToggle) {
             return;
         }
+        loadData();
         //otherwise, give water
         needThirst = Math.min(MAX_THIRST, needThirst + STAT_REPLENISH);
 
         waterToggle = false;
+        thirstText.setVisibility(View.GONE);
         careButton.setVisibility(View.VISIBLE);
         foodButton.setVisibility(View.VISIBLE);
         graphicIndicator.setVisibility(View.GONE);
 
-        sensorManager.unregisterListener(rotateListener);
         saveData();
     }
     public boolean onTouchEvent(MotionEvent event) {
@@ -346,6 +323,9 @@ public class Mainscreen extends AppCompatActivity {
                 foodButton.setVisibility(View.VISIBLE);
                 waterButton.setVisibility(View.VISIBLE);
                 graphicIndicator.setVisibility(View.GONE);
+            }
+            else if (waterToggle) {
+                pourTheDamnWater();
             }
         }
         return true;
@@ -393,7 +373,7 @@ public class Mainscreen extends AppCompatActivity {
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         needHunger = sharedPreferences.getInt("BCHUNGER", 100);
-        needThirst = sharedPreferences.getInt("BCTHURST", 100);
+        needThirst = sharedPreferences.getInt("BCTHIRST", 100);
         needLove = sharedPreferences.getInt("BCLOVE", 100);
     }
 
@@ -402,14 +382,12 @@ public class Mainscreen extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         sensorManager.unregisterListener(shakeListener);
-        sensorManager.unregisterListener(rotateListener);
         saveData();
     }
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(shakeListener);
-        sensorManager.unregisterListener(rotateListener);
         saveData();
     }
 
@@ -417,7 +395,6 @@ public class Mainscreen extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         sensorManager.unregisterListener(shakeListener);
-        sensorManager.unregisterListener(rotateListener);
         saveData();
     }
 }
