@@ -46,6 +46,7 @@ public class QuizActivity extends AppCompatActivity {
         quizBtn2 = (ImageButton) findViewById(R.id.quizButton2);
         quizBtn3 = (ImageButton) findViewById(R.id.quizButton3);
         quizpointTxt.setText((question+1) + "/10");
+        Test.setVisibility(View.INVISIBLE); //debug remove
 
         quizBtn1.setOnClickListener(new View.OnClickListener() {
             @Override

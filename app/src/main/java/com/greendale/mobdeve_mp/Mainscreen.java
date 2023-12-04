@@ -278,7 +278,7 @@ public class Mainscreen extends AppCompatActivity {
             thirstText.setVisibility(View.VISIBLE);
             gesture.setAnimation(null);
             gesture.setImageResource(R.drawable.tapicon);
-            gesture.setAnimation(AnimationUtils.loadAnimation(this,R.anim.infiniteshake));
+            gesture.setAnimation(AnimationUtils.loadAnimation(this,R.anim.growshrink));
             loadData();
             thirstText.setText(needThirst+"%");
             container.setImageResource(R.drawable.waterpitcher);

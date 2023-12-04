@@ -124,6 +124,7 @@ public class Battle extends AppCompatActivity {
         playerBar.setProgress(byteHP%byteMaxHP);
         battleplayerhp.setText(byteHP+"/"+byteMaxHP);
         enemyhptext.setText(enemyHP+"/"+enemymaxHP);
+        wintest.setVisibility(View.INVISIBLE);
     }
     public void Pause(View view) {
         battlePopup.setVisibility(View.VISIBLE);canFight=false;
