@@ -178,6 +178,7 @@ public class Mainscreen extends AppCompatActivity {
     public void checkPetGone() {
         if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
         else bytePet.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -227,6 +228,8 @@ public class Mainscreen extends AppCompatActivity {
             hungerText.setVisibility(View.VISIBLE);
             hungerText.setText(needHunger+"%");
             graphicIndicator.setVisibility(View.VISIBLE);
+            container.setVisibility(View.VISIBLE);
+            bowl.setVisibility(View.VISIBLE);
             gesture.setImageResource(R.drawable.shakeicon);
             gesture.setAnimation(AnimationUtils.loadAnimation(this,R.anim.infiniteshake));
             //only allow feeding if hunger < max
@@ -264,8 +267,12 @@ public class Mainscreen extends AppCompatActivity {
         loadData();
         needHunger = Math.min(MAX_HUNGER, needHunger + STAT_REPLENISH);
         foodMP.start();
-        if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
-        else bytePet.setVisibility(View.VISIBLE);
+        if (needHunger == 0 || needThirst == 0) {bytePet.setVisibility(View.INVISIBLE);
+            careButton.setVisibility(View.INVISIBLE);
+            fightButton.setVisibility(View.INVISIBLE);}
+        else{ bytePet.setVisibility(View.VISIBLE);
+            careButton.setVisibility(View.VISIBLE);
+            fightButton.setVisibility(View.VISIBLE);}
         //violate DRY
         foodToggle = false;
         careButton.setVisibility(View.VISIBLE);
@@ -280,6 +287,8 @@ public class Mainscreen extends AppCompatActivity {
         if (!waterToggle){
             waterToggle = true;
             graphicIndicator.setVisibility(View.VISIBLE);
+            container.setVisibility(View.VISIBLE);
+            bowl.setVisibility(View.VISIBLE);
             thirstText.setVisibility(View.VISIBLE);
             gesture.setAnimation(null);
             gesture.setImageResource(R.drawable.tapicon);
@@ -318,14 +327,17 @@ public class Mainscreen extends AppCompatActivity {
         //otherwise, give water
         needThirst = Math.min(MAX_THIRST, needThirst + STAT_REPLENISH);
         waterMP.start();
-        if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
-        else bytePet.setVisibility(View.VISIBLE);
+        if (needHunger == 0 || needThirst == 0) {bytePet.setVisibility(View.INVISIBLE);
+            careButton.setVisibility(View.INVISIBLE);
+            fightButton.setVisibility(View.INVISIBLE);}
+        else{ bytePet.setVisibility(View.VISIBLE);
+            careButton.setVisibility(View.VISIBLE);
+            fightButton.setVisibility(View.VISIBLE);}
         waterToggle = false;
         thirstText.setVisibility(View.GONE);
         careButton.setVisibility(View.VISIBLE);
         foodButton.setVisibility(View.VISIBLE);
         graphicIndicator.setVisibility(View.GONE);
-
         saveData();
     }
     public boolean onTouchEvent(MotionEvent event) {
