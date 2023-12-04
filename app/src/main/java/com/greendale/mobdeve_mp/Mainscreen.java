@@ -170,8 +170,12 @@ public class Mainscreen extends AppCompatActivity {
         //load current hunger/thirst/love values into ints
         loadData();
         //check if pet should be gone
-        if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
-        else bytePet.setVisibility(View.VISIBLE);
+        if (needHunger == 0 || needThirst == 0) {bytePet.setVisibility(View.INVISIBLE);
+        careButton.setVisibility(View.INVISIBLE);
+        fightButton.setVisibility(View.INVISIBLE);}
+        else{ bytePet.setVisibility(View.VISIBLE);
+            careButton.setVisibility(View.VISIBLE);
+            fightButton.setVisibility(View.VISIBLE);}
     }
 
     @Override
@@ -260,8 +264,12 @@ public class Mainscreen extends AppCompatActivity {
         loadData();
         needHunger = Math.min(MAX_HUNGER, needHunger + STAT_REPLENISH);
         foodMP.start();
-        if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
-        else bytePet.setVisibility(View.VISIBLE);
+        if (needHunger == 0 || needThirst == 0) {bytePet.setVisibility(View.INVISIBLE);
+            careButton.setVisibility(View.INVISIBLE);
+            fightButton.setVisibility(View.INVISIBLE);}
+        else{ bytePet.setVisibility(View.VISIBLE);
+            careButton.setVisibility(View.VISIBLE);
+            fightButton.setVisibility(View.VISIBLE);}
         //violate DRY
         foodToggle = false;
         careButton.setVisibility(View.VISIBLE);
@@ -314,14 +322,17 @@ public class Mainscreen extends AppCompatActivity {
         //otherwise, give water
         needThirst = Math.min(MAX_THIRST, needThirst + STAT_REPLENISH);
         waterMP.start();
-        if (needHunger == 0 || needThirst == 0) bytePet.setVisibility(View.INVISIBLE);
-        else bytePet.setVisibility(View.VISIBLE);
+        if (needHunger == 0 || needThirst == 0) {bytePet.setVisibility(View.INVISIBLE);
+            careButton.setVisibility(View.INVISIBLE);
+            fightButton.setVisibility(View.INVISIBLE);}
+        else{ bytePet.setVisibility(View.VISIBLE);
+            careButton.setVisibility(View.VISIBLE);
+            fightButton.setVisibility(View.VISIBLE);}
         waterToggle = false;
         thirstText.setVisibility(View.GONE);
         careButton.setVisibility(View.VISIBLE);
         foodButton.setVisibility(View.VISIBLE);
         graphicIndicator.setVisibility(View.GONE);
-
         saveData();
     }
     public boolean onTouchEvent(MotionEvent event) {
