@@ -399,7 +399,7 @@ public class Mainscreen extends AppCompatActivity {
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED_PREFERENCES", Context.MODE_PRIVATE);
         needHunger = sharedPreferences.getInt("BCHUNGER", 100);
-        needThirst = sharedPreferences.getInt("BCTHURST", 100);
+        needThirst = sharedPreferences.getInt("BCTHIRST", 100);
         needLove = sharedPreferences.getInt("BCLOVE", 100);
     }
 
